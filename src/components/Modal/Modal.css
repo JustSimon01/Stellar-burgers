@@ -1,0 +1,29 @@
+.Modal {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 40px;
+  background-color: #1C1C21;
+  width: 720px;
+  height: 718px;
+}
+
+.text-light-color {
+  color: #8585AD;
+}
+
+.close-button {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  width: 18px;
+  height: 18px;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  background-image: url(../../images/close.svg);
+  cursor: pointer;
+}
