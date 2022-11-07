@@ -3,13 +3,12 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsStyles from './BurgerIngredients.css';
-import blockWithScrollStyles from './block-with-scroll/block-with-scroll.css'
-import Ingredient from './Ingredient/Ingredient'
+import IngredientBox from './Ingredient/Ingredient'
 
-function BurgerIngredients()  {
+function BurgerIngredients({data})  {
   const [current, setCurrent] = React.useState('one')
   return (
-    <section className='BurgerIngredients pt-10 pb-10'>
+    <section className='BurgerIngredients pt-10'>
     <h1 className='text text_type_main-large pb-5'>Соберите бургер</h1>
     <div style={{ display: 'flex' }} className='pb-10'>
       <Tab className="text text_type_main-medium" value="one" active={current === 'one'} onClick={setCurrent}>
@@ -23,8 +22,9 @@ function BurgerIngredients()  {
       </Tab>
     </div>
     <div className='block-with-scroll'>
-      <Ingredient />
-
+      <IngredientBox title ={'Булки'} mealType={'bun'} data={data}/>
+      <IngredientBox title ={'Соусы'} mealType={'sauce'} data={data}/>
+      <IngredientBox title ={'Начинки'} mealType={'main'} data={data}/>
     </div>
     </section>
   )

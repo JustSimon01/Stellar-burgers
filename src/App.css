@@ -3,6 +3,13 @@
   max-width: 1920px;
 }
 
+.App-main {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

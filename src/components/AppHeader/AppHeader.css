@@ -11,6 +11,7 @@
 .menu {
   display: grid;
   margin: 0;
+  padding: 0;
   align-items: center;
   grid-template-areas:
   "menu-left logo menu-right";
