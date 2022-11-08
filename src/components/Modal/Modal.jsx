@@ -1,21 +1,26 @@
-import React, { Children } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import modalStyles from './Modal.css'
 import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
-function Modal ( {active, setActive, children, stateReset}) {
+function Modal ( {active, children, handleClose}) {
   
   return ( 
-    <ModalOverlay active={active} setActive={setActive} stateReset={stateReset}>
+    <ModalOverlay active={active} handleClose={handleClose}>
     <div className={active ? "Modal active" : "Modal" } onClick={(e)=>e.stopPropagation()}>
-      <button className='close-button' onClick={()=>{setActive(false); stateReset()}}/>
+      <button className='close-button' onClick={handleClose}/>
       {children}
     </div>
     </ModalOverlay>
    );
 }
 
-export default Modal ;
+Modal.propTypes = {
+  active: PropTypes.bool.isRequired,
+  children: PropTypes.object.isRequired, 
+  handleClose: PropTypes.func.isRequired
+}
 
-//pt-30 pb-30 pr-25 pl-25
+export default Modal ;

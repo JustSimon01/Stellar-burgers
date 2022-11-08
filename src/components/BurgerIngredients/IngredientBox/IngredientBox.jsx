@@ -14,6 +14,11 @@ const IngredientBox = ({title, mealType, data}) => {
   const [modalActive, setModalActive] = React.useState(false);
   const [ingredientsData, setIngredientsData] = React.useState({});
 
+  function handleClose () {
+    setModalActive(false);
+    setIngredientsData({});
+  }
+
   const Ingredient = (data, mealType) => {
     if (data.type === mealType) {
       return (
@@ -30,16 +35,7 @@ const IngredientBox = ({title, mealType, data}) => {
     }
   }
   
-  Ingredient.propTypes = {
-    _id: PropTypes.string,
-    image: PropTypes.string,
-    price: PropTypes.number,
-    name: PropTypes.string,
-    type: PropTypes.string,
-  }
-
   const LoadIngredients = ({mealType}) => {
-    console.log(mealType)
     return data.map((item) => Ingredient(item, mealType))
   }
 
@@ -49,7 +45,7 @@ const IngredientBox = ({title, mealType, data}) => {
       <ul className='ml-4 mr-4 ingredients-box '>
         <LoadIngredients mealType={mealType}/>
       </ul>
-      <Modal active={modalActive} setActive={setModalActive} stateReset={()=>setIngredientsData(false)}>
+      <Modal active={modalActive} handleClose={handleClose}>
         <IngredientDetails ingredientsData={ingredientsData}/>
       </Modal>
       </div>
@@ -57,5 +53,10 @@ const IngredientBox = ({title, mealType, data}) => {
   )
 }
 
+IngredientBox.propTypes = {
+  title: PropTypes.string.isRequired,
+  mealType: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
+}
 
 export default IngredientBox;

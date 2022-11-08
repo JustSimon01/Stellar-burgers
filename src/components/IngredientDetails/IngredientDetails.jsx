@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetailsStyles from './IngredientDetails.css'
 
 
 function IngredientDetails({ingredientsData}) {
-  console.log(ingredientsData.name);
   return (
     <div className='ingredient-details pt-10 pl-10 pr-10 pb-60'>
       <h2 className='ingredient-header text text_type_main-large'>Детали ингредиента</h2>
@@ -30,6 +30,10 @@ function IngredientDetails({ingredientsData}) {
       </ul>
     </div>
   );
+}
+
+IngredientDetails.propTypes = {
+  ingredientsData: PropTypes.object.isRequired
 }
 
 export default IngredientDetails;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -28,6 +29,10 @@ function BurgerIngredients({data})  {
     </div>
     </section>
   )
+}
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.array.isRequired
 }
 
 export default BurgerIngredients;

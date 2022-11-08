@@ -31,7 +31,7 @@ FillingElement.propTypes = {
   thumbnail: PropTypes.string,
 }
 
-function BurgerConstructor({active, setActive}) {
+function BurgerConstructor() {
 
   const [modalActive, setModalActive] = React.useState(false)
 
@@ -96,7 +96,7 @@ function BurgerConstructor({active, setActive}) {
           Оформить заказ
         </Button>
       </div>
-      <Modal active={modalActive} setActive={setModalActive}>
+      <Modal active={modalActive} handleClose={()=>setModalActive(false)}>
         <OrderDetails/>
         </Modal>
     </section>
