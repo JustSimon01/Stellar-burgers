@@ -1,0 +1,42 @@
+.app-header {
+  max-width: 1920px;
+  background: #1C1C21;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.app-header-menu {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  grid-template-areas:
+  "menu-left logo menu-right";
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1280px;
+  width: 100%;
+}
+
+.app-header-menu-left {
+  grid-area: menu-left;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  gap: 8px;
+}
+
+.app-header-logo {
+  grid-area: logo;
+  justify-content: center;
+}
+
+.app-header-menu-right {
+  grid-area: menu-right;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
