@@ -15,7 +15,7 @@ function App() {
   });
 
   React.useEffect(() =>{
-    const getFilms = () => {
+    const getData = () => {
       setState({ ...state, hasError: false, isLoading: true });
       fetch('https://norma.nomoreparties.space/api/ingredients')
         .then(res => res.json())
@@ -25,7 +25,7 @@ function App() {
         });
     };
      
-     getFilms();
+     getData();
      
    }, []);
 
