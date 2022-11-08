@@ -1,24 +1,21 @@
 import React from 'react';
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Logo, BurgerIcon, ProfileIcon, ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
-import Constructor from './constructor/constructor';
-import OrderFeed from './orderFeed/orderFeed';
-import Profile from './profile/profile';
-
+import MenuSection from './MenuSection/MenuSection';
 import AppHeaderStyles from './AppHeader.css';
 
 class AppHeader extends React.Component {  
   render() {
     return (
-      <header className="AppHeader text text_type_main-default">
-        <menu className='menu'>
-          <div className='menu-left'>
-            <Constructor />
-            <OrderFeed />
+      <header className="app-header text text_type_main-default">
+        <menu className='app-header-menu'>
+          <div className='app-header-menu-left'>
+            <MenuSection text="Конструктор"><BurgerIcon type="secondary" /></MenuSection>
+            <MenuSection text="Лента заказов"><ListIcon type="secondary" /></MenuSection>
           </div>
-          <div className="logo"><Logo /></div>
-          <div className='menu-right'>
-            <Profile />
+          <div className="app-header-logo"><Logo /></div>
+          <div className='app-header-menu-right'>
+            <MenuSection text="Личный кабинет"><ProfileIcon type="secondary" /></MenuSection>
           </div>
         </menu>
       </header>

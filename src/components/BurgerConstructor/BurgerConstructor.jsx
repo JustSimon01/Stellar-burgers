@@ -6,12 +6,11 @@ import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Box} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import Modal from '../Modal/Modal';
+import OrderDetails from '../OrderDetails/OrderDetails';
 
 const img = 'https://code.s3.yandex.net/react/code/bun-02-mobile.png';
 const imgFilling = 'https://code.s3.yandex.net/react/code/meat-04-mobile.png';
-
-
-
 
 const FillingElement = ({text, price, thumbnail}) => {
   return (
@@ -32,9 +31,12 @@ FillingElement.propTypes = {
   thumbnail: PropTypes.string,
 }
 
-function BurgerConstructor() {
+function BurgerConstructor({active, setActive}) {
+
+  const [modalActive, setModalActive] = React.useState(false)
+
   return ( 
-    <section className='BurgerConstructor'>
+    <section className='burger-constructor'>
       <div className='bun-element mr-4'>
         <ConstructorElement
          type="top"
@@ -44,7 +46,7 @@ function BurgerConstructor() {
          thumbnail={img}
        />
       </div>
-      <ul className='burgerConstructor-filling mt-4 mb-4'>
+      <ul className='burger-constructor-filling mt-4 mb-4'>
         <FillingElement 
           text={"Говяжий метеорит (отбивная)"}
           price={9999}
@@ -90,10 +92,13 @@ function BurgerConstructor() {
           <p className='text text_type_digits-medium'>650</p>
           <CurrencyIcon />
         </div>
-        <Button type="primary" size="medium">
+        <Button type="primary" size="medium" onClick={()=>setModalActive(true)}>
           Оформить заказ
         </Button>
       </div>
+      <Modal active={modalActive} setActive={setModalActive}>
+        <OrderDetails/>
+        </Modal>
     </section>
    );
 }

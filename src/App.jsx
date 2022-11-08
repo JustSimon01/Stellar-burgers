@@ -3,8 +3,7 @@ import './App.css';
 import AppHeader from './components/AppHeader/AppHeader';
 import BurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from './components/BurgerConstructor/BurgerConstructor';
-import Modal from './components/Modal/Modal'
-import ModalOverlay from './components/ModalOverlay/ModalOverlay'
+
 
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
       <main className='App-main'>
         <BurgerIngredients data={state.data}/>
         <BurgerConstructor />
-        <ModalOverlay />
       </main>
     </div>
   );

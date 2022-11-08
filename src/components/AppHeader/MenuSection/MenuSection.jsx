@@ -1,18 +1,18 @@
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import styles from './menu-section.module.css';
+import styles from './MenuSection.module.css';
 
 
-function Constructor(){
+function MenuSection({text, children}){
 
   return (
     <div className= {styles.section}>
-      <BurgerIcon type="secondary" />
-      <p className= {styles.text}>Конструктор</p>
+      {children}
+      <p className= {styles.text}>{text}</p>
     </div>
   )
 
 }
 
-export default Constructor;
+export default MenuSection;

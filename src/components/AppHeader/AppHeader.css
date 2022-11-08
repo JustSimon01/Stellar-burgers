@@ -1,4 +1,4 @@
-.AppHeader {
+.app-header {
   max-width: 1920px;
   background: #1C1C21;
   display: flex;
@@ -8,7 +8,7 @@
   padding: 24px 0;
 }
 
-.menu {
+.app-header-menu {
   display: grid;
   margin: 0;
   padding: 0;
@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.menu-left {
+.app-header-menu-left {
   grid-area: menu-left;
   display: flex;
   flex-direction: row;
@@ -29,12 +29,12 @@
   gap: 8px;
 }
 
-.logo {
+.app-header-logo {
   grid-area: logo;
   justify-content: center;
 }
 
-.menu-right {
+.app-header-menu-right {
   grid-area: menu-right;
   display: flex;
   flex-direction: row;
