@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientStyles from './IngredientBox.css'
@@ -11,18 +11,18 @@ import IngredientDetails from '../../IngredientDetails/IngredientDetails';
 
 const IngredientBox = ({title, mealType, data}) => {
   
-  const [modalActive, setModalActive] = React.useState(false);
-  const [ingredientsData, setIngredientsData] = React.useState({});
+  const [modalActive, setModalActive] = useState(false);
+  const [ingredientsData, setIngredientsData] = useState({});
 
   function handleClose () {
     setModalActive(false);
     setIngredientsData({});
   }
 
-  const Ingredient = (data, mealType) => {
+  const Ingredient = ({data, mealType}) => {
     if (data.type === mealType) {
       return (
-        <li className='ingredient' key={data._id} onClick={()=>{setIngredientsData(data); setModalActive(true)}}>
+        <li className='ingredient' onClick={()=>{setIngredientsData(data); setModalActive(true)}}>
           <Counter count={1} size="default" extraClass="m-1" />
           <img className='ingredient-img pl-4 pr-4 pb-1' src={data.image} />
           <div className='ingredient-price pb-1'>
@@ -35,21 +35,18 @@ const IngredientBox = ({title, mealType, data}) => {
     }
   }
   
-  const LoadIngredients = ({mealType}) => {
-    return data.map((item) => Ingredient(item, mealType))
-  }
-
   return (
-    <><div>
+    <div>
       <h2 className='text text_type_main-medium'>{title}</h2>
       <ul className='ml-4 mr-4 ingredients-box '>
-        <LoadIngredients mealType={mealType}/>
+        {data.map((item) =>
+          <Ingredient data={item} mealType={mealType} key={item._id}/>
+        )}
       </ul>
-      <Modal active={modalActive} handleClose={handleClose}>
+      <Modal open={modalActive} handleClose={handleClose}>
         <IngredientDetails ingredientsData={ingredientsData}/>
       </Modal>
-      </div>
-    </>
+    </div>
   )
 }
 

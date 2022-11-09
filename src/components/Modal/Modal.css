@@ -1,5 +1,5 @@
 .Modal {
-  display:none;
+  display: block;
   box-sizing: border-box;
   position: fixed;
   z-index: 3;
@@ -22,8 +22,4 @@
   border: none;
   background-image: url(../../images/close.svg);
   cursor: pointer;
-}
-
-.Modal.active {
-  display: block;
 }

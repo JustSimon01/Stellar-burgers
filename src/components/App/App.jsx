@@ -1,24 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
-import AppHeader from './components/AppHeader/AppHeader';
-import BurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from './components/BurgerConstructor/BurgerConstructor';
+import AppHeader from '../AppHeader/AppHeader';
+import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
+import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 
 
 
 function App() {
 
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     isLoading: false,
     hasError: false,
     data: []
   });
 
-  React.useEffect(() =>{
+  useEffect(() =>{
     const getData = () => {
       setState({ ...state, hasError: false, isLoading: true });
       fetch('https://norma.nomoreparties.space/api/ingredients')
-        .then(res => res.json())
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Что-то пошло не так: ${res.status}`);
+        })
         .then(({data}) => setState({ ...state, data, isLoading: false }))
         .catch(e => {
           setState({ ...state, hasError: true, isLoading: false });
@@ -34,7 +39,7 @@ function App() {
       <AppHeader />
       <main className='App-main'>
         <BurgerIngredients data={state.data}/>
-        <BurgerConstructor />
+        <BurgerConstructor data={state.data}/>
       </main>
     </div>
   );

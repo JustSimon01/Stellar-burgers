@@ -1,24 +1,33 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import ReactDom from "react-dom";
 import PropTypes from 'prop-types';
 import modalStyles from './Modal.css'
 import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
-import OrderDetails from '../OrderDetails/OrderDetails';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
-function Modal ( {active, children, handleClose}) {
-  
-  return ( 
-    <ModalOverlay active={active} handleClose={handleClose}>
-    <div className={active ? "Modal active" : "Modal" } onClick={(e)=>e.stopPropagation()}>
-      <button className='close-button' onClick={handleClose}/>
-      {children}
-    </div>
-    </ModalOverlay>
-   );
+function Modal ({open, children, handleClose}) {
+
+  useEffect(()=>{
+    const closeEsc = (e) => (e.key === 'Escape' ? handleClose() : null)
+    document.addEventListener('keydown', closeEsc);
+    return () => document.removeEventListener('keydown', closeEsc);
+})
+
+  if (!open) return null;
+
+  return ReactDom.createPortal( 
+    <>
+      <div className="Modal">
+        <button className='close-button' onClick={handleClose}/>
+        {children}
+      </div>
+      <ModalOverlay handleClose={handleClose}/>
+    </>,
+   document.getElementById('portal')
+   )
 }
 
 Modal.propTypes = {
-  active: PropTypes.bool.isRequired,
   children: PropTypes.object.isRequired, 
   handleClose: PropTypes.func.isRequired
 }

@@ -7,10 +7,10 @@ import styles from './MenuSection.module.css';
 function MenuSection({text, children}){
 
   return (
-    <div className= {styles.section}>
+    <a href='#' className= {styles.section}>
       {children}
-      <p className= {styles.text}>{text}</p>
-    </div>
+      <p className= {`${styles.text} text text_type_main-default`}>{text}</p>
+    </a>
   )
 
 }

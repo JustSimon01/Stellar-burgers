@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,7 +7,8 @@ import BurgerIngredientsStyles from './BurgerIngredients.css';
 import IngredientBox from './IngredientBox/IngredientBox'
 
 function BurgerIngredients({data})  {
-  const [current, setCurrent] = React.useState('one')
+  const [current, setCurrent] = useState('one')
+  
   return (
     <section className='burger-ingredients pt-10'>
     <h1 className='text text_type_main-large pb-5'>Соберите бургер</h1>
@@ -31,8 +32,22 @@ function BurgerIngredients({data})  {
   )
 }
 
+
 BurgerIngredients.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.arrayOf(PropTypes.shape(
+    {
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired
+    }
+  )).isRequired
 }
 
 export default BurgerIngredients;
