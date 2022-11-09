@@ -1,0 +1,29 @@
+.burger-ingredients {
+  max-height: 912px;
+  width: 600px;
+  text-align: left;
+}
+
+.block-with-scroll {
+  height: 716px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-content: flex-start;
+  overflow-y: scroll;
+}
+
+.block-with-scroll::-webkit-scrollbar {
+  width: 8px; /* ширина для вертикального скролла */
+  background-color: #2F2F37;
+}
+
+/* ползунок скроллбара */
+.block-with-scroll::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.block-with-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #6d6dac;
+
+}
