@@ -5,6 +5,7 @@ import modalStyles from './Modal.css'
 import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
+
 function Modal ({open, children, handleClose}) {
 
   useEffect(()=>{

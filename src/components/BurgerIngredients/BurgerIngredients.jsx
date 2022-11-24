@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsStyles from './BurgerIngredients.css';
 import IngredientBox from './IngredientBox/IngredientBox'
+import { DataContext } from '../../contextData/contextData';
 
-function BurgerIngredients({data})  {
+function BurgerIngredients()  {
+  const data = useContext(DataContext);
   const [current, setCurrent] = useState('one')
   
   return (
