@@ -6,16 +6,15 @@ const config = {
   }
 }
 
-export function getAllIngredients () {
+export function getAllIngredients() {
   return fetch(`${config.baseURL}/ingredients`, {
     method: 'GET',
     headers: config.headers
   })
-  .then(res => getResponseData(res))
+    .then(res => checkResponse(res))
 }
 
 export function postOrderInfo(array) {
-  console.log(array);
   return fetch(`${config.baseURL}/orders`, {
     method: 'POST',
     headers: config.headers,
@@ -23,13 +22,13 @@ export function postOrderInfo(array) {
       ingredients: array
     })
   })
-  .then(res => getResponseData(res))
+    .then(res => checkResponse(res))
 }
 
 //проверка запросов
-function getResponseData(res) {
+function checkResponse(res) {
   if (!res.ok) {
-      return Promise.reject(`Ошибка: ${res.status}`); 
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
   return res.json();
 } 

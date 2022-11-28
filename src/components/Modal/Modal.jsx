@@ -1,36 +1,35 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import ReactDom from "react-dom";
 import PropTypes from 'prop-types';
+/* eslint-disable */
+//данные стили используются, но eslint выдает предупреждения в терминале
 import modalStyles from './Modal.css'
-import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
+/* eslint-enable */
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
+function Modal({ children, handleClose }) {
 
-function Modal ({open, children, handleClose}) {
-
-  useEffect(()=>{
+  useEffect(() => {
     const closeEsc = (e) => (e.key === 'Escape' ? handleClose() : null)
     document.addEventListener('keydown', closeEsc);
     return () => document.removeEventListener('keydown', closeEsc);
-})
+  }, [handleClose])
 
-  if (!open) return null;
-
-  return ReactDom.createPortal( 
+  return ReactDom.createPortal(
     <>
       <div className="Modal">
-        <button className='close-button' onClick={handleClose}/>
+        <button className='close-button' onClick={handleClose} />
         {children}
       </div>
-      <ModalOverlay handleClose={handleClose}/>
+      <ModalOverlay handleClose={handleClose} />
     </>,
-   document.getElementById('portal')
-   )
+    document.getElementById('portal')
+  )
 }
 
 Modal.propTypes = {
-  children: PropTypes.object.isRequired, 
+  children: PropTypes.object.isRequired,
   handleClose: PropTypes.func.isRequired
 }
 
-export default Modal ;
+export default Modal;

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../Modal/Modal';
+/* eslint-disable */
+//данные стили используются, но eslint выдает предупреждения в терминале
 import modalClass from './ModalOverlay.css';
+/* eslint-enable */
+function ModalOverlay({ handleClose }) {
 
-
-function ModalOverlay({handleClose}) {
-  
   return (
     <div className='modal-overlay' onClick={handleClose}>
     </div>

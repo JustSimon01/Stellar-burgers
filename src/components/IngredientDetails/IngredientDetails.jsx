@@ -1,14 +1,16 @@
 import React from 'react';
+/* eslint-disable */
+//данные стили используются, но eslint выдает предупреждения в терминале
 import PropTypes from 'prop-types';
-import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientDetailsStyles from './IngredientDetails.css'
+import IngredientDetailsStyles from './IngredientDetails.css';
+/* eslint-enable */
+import { ingredientPropTypes } from '../../utils/PropTypes'
 
-
-function IngredientDetails({ingredientsData}) {
+function IngredientDetails({ ingredientsData }) {
   return (
     <div className='ingredient-details pt-10 pl-10 pr-10 pb-60'>
       <h2 className='ingredient-header text text_type_main-large'>Детали ингредиента</h2>
-      <img className='ingredient-image'src={ingredientsData.image_large}/>
+      <img className='ingredient-image' alt="картинка ингредиента" src={ingredientsData.image_large} />
       <h3 className='ingredient-name text text_type_main-medium pt-4 pb-8'>{ingredientsData.name}</h3>
       <ul className='nutritional-block mt-8 mb-15'>
         <li className='nutritional-value'>
@@ -33,7 +35,7 @@ function IngredientDetails({ingredientsData}) {
 }
 
 IngredientDetails.propTypes = {
-  ingredientsData: PropTypes.object.isRequired
+  ingredientsData: ingredientPropTypes.isRequired
 }
 
 export default IngredientDetails;

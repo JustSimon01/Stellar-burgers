@@ -14,7 +14,7 @@
   padding: 0;
   align-items: center;
   grid-template-areas:
-  "menu-left logo menu-right";
+    "menu-left logo menu-right";
   grid-template-columns: repeat(3, 1fr);
   max-width: 1280px;
   width: 100%;
