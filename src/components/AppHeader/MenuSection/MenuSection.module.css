@@ -6,9 +6,14 @@
   gap: 8px;
   padding: 17px 20px;
   text-decoration: none;
-  color: #F2F2F3;
+  color: #8585AD;
 }
 
 .text {
   margin: 0;
+
+}
+
+.active {
+  color: #F2F2F3;
 }

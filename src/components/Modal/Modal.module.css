@@ -1,4 +1,4 @@
-.Modal {
+.modal {
   display: block;
   box-sizing: border-box;
   position: fixed;
@@ -11,7 +11,7 @@
   width: 720px;
 }
 
-.close-button {
+.closeButton {
   position: absolute;
   top: 60px;
   right: 40px;

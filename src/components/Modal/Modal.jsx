@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDom from "react-dom";
 import PropTypes from 'prop-types';
-/* eslint-disable */
-//данные стили используются, но eslint выдает предупреждения в терминале
-import modalStyles from './Modal.css'
-/* eslint-enable */
+import styles from './Modal.module.css'
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
 function Modal({ children, handleClose }) {
@@ -17,8 +14,8 @@ function Modal({ children, handleClose }) {
 
   return ReactDom.createPortal(
     <>
-      <div className="Modal">
-        <button className='close-button' onClick={handleClose} />
+      <div className={`${styles.modal}`}>
+        <button className={`${styles.closeButton}`} onClick={handleClose} />
         {children}
       </div>
       <ModalOverlay handleClose={handleClose} />

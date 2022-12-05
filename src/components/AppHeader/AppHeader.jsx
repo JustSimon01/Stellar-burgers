@@ -12,7 +12,7 @@ class AppHeader extends React.Component {
       <header className="app-header text text_type_main-default">
         <menu className='app-header-menu'>
           <div className='app-header-menu-left'>
-            <MenuSection text="Конструктор"><BurgerIcon type="primary" /></MenuSection>
+            <MenuSection text="Конструктор" active={true}><BurgerIcon type="primary" /></MenuSection>
             <MenuSection text="Лента заказов"><ListIcon type="secondary" /></MenuSection>
           </div>
           <div className="app-header-logo"><Logo /></div>

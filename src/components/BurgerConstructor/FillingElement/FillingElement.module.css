@@ -1,4 +1,4 @@
-.filling-element {
+.fillingElement {
   display: flex;
   max-width: 568px;
   width: 100%;
@@ -7,6 +7,6 @@
   gap: 8px;
 }
 
-.constructor-width{
+.constructorWidth {
   width: 572px;
 }

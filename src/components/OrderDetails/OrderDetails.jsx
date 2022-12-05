@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 /* eslint-disable */
 //данные стили используются, но eslint выдает предупреждения в терминале
-import OrderDetailsStyles from './OrderDetails.css'
+import styles from './OrderDetails.module.css'
 /* eslint-enable */
 import confirmImg from '../../images/confirm.svg';
 import { OrderNumberContext } from '../../services/contextData';
@@ -12,7 +12,7 @@ function OrderDetails() {
   const orderNumber = String(order.number).padStart(zeroLength, '0');
 
   return (
-    <div className='order-detales'>
+    <div className={`${styles.orderDetales}`}>
       <p className='text text_type_digits-large pb-8'>{orderNumber}</p>
       <h3 className='text text_type_main-medium'>идентификатор заказа</h3>
       <img src={confirmImg} alt='знак подтверждения заказа' className='pt-15 pb-15' type="primary" />

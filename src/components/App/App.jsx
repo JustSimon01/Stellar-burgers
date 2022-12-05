@@ -37,10 +37,7 @@ function App() {
         : <main className='App-main'>
           <DataContext.Provider value={state.data}>
             <BurgerIngredients data={state.data} />
-
-
             <BurgerConstructor />
-
           </DataContext.Provider>
         </main>
       }

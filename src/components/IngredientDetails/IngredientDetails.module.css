@@ -1,10 +1,10 @@
-.ingredient-details {
+.ingredientDetails {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.nutritional-block {
+.nutritionalBlock {
   padding: 0;
   display: flex;
   flex-direction: row;
@@ -12,7 +12,7 @@
   gap: 20px;
 }
 
-.nutritional-value {
+.nutritionalValue {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,19 +22,19 @@
   color: #8585AD;
 }
 
-.ingredient-header {
+.ingredientHeader {
   display: flex;
   align-items: center;
   width: 640px;
   height: 64px;
 }
 
-.ingredient-image {
+.ingredientImage {
   width: 480px;
   height: 240px;
 }
 
-.ingredient-name {
+.ingredientName {
   text-align: center;
   width: 520px;
 }
