@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './IngredientDetails.module.css';
 import { ingredientPropTypes } from '../../utils/PropTypes'

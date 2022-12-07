@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './FillingElement.module.css';
 import { ingredientPropTypes } from '../../../utils/PropTypes';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';

@@ -5,8 +5,13 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import { DataContext } from '../../services/contextData';
 import { getAllIngredients } from '../../API/api';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+
+  const dispatch = useDispatch();
+  const cash = useSelector(state => state.reducerR.cash)
+  console.log(cash)
 
   const [state, setState] = useState({
     isLoading: false,
