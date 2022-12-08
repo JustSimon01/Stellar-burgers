@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerIngredients.module.css';
 import IngredientBox from './IngredientBox/IngredientBox'
-import { DataContext } from '../../services/contextData';
-import { ingredientPropTypes } from '../../utils/PropTypes';
+import { useSelector } from 'react-redux';
 
 function BurgerIngredients() {
 
-  const data = useContext(DataContext);
+  const data = useSelector((store) => store.ingredients.items); // временная подгрузка данных
+
   const [current, setCurrent] = useState('buns')
 
   function handleButtonClick(tab) {
@@ -42,8 +41,5 @@ function BurgerIngredients() {
 }
 
 
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired
-}
 
 export default BurgerIngredients;

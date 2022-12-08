@@ -1,19 +1,20 @@
-import React, { useContext } from 'react';
-/* eslint-disable */
-//данные стили используются, но eslint выдает предупреждения в терминале
+import React from 'react';
 import styles from './OrderDetails.module.css'
-/* eslint-enable */
+
 import confirmImg from '../../images/confirm.svg';
-import { OrderNumberContext } from '../../services/contextData';
+import { useSelector } from 'react-redux';
 
 function OrderDetails() {
-  const { order } = useContext(OrderNumberContext);
   const zeroLength = 6;
-  const orderNumber = String(order.number).padStart(zeroLength, '0');
+  const orderInfo = useSelector((store) => store.orderInformation.orderNumber); //данные заказа
+  const orderNumber = String(orderInfo).padStart(zeroLength, '0');
 
   return (
     <div className={`${styles.orderDetales}`}>
-      <p className='text text_type_digits-large pb-8'>{orderNumber}</p>
+      {orderInfo === null
+        ? <p className='text text_type_main-large pb-8'>Загрузка</p>
+        : <p className='text text_type_digits-large pb-8'>{orderNumber}</p>
+      }
       <h3 className='text text_type_main-medium'>идентификатор заказа</h3>
       <img src={confirmImg} alt='знак подтверждения заказа' className='pt-15 pb-15' type="primary" />
       <p className='text text_type_main-default pb-2'>Ваш заказ начали готовить</p>

@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../../utils/PropTypes';
-/* eslint-disable */
-//данные стили используются, но eslint выдает предупреждения в терминале
 import styles from './IngredientBox.module.css'
-/* eslint-enable */
 import Ingredient from './Ingredient/Ingredient';
-
 
 const IngredientBox = ({ titleId, title, mealType, data }) => {
 

@@ -1,27 +1,28 @@
-import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILED } from '../actions/actions';
-import { getAllIngredients } from '../../API/api'
+import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILED } from '../actions/ingresients-data';
+
 
 // список всех полученных ингредиентов,
 
+const initialState = {
+  items: [],
+  itemsRequest: false,
+  itemsFailed: false,
+  itemsLoaded: false,
+};
 
-export function getItems() {
-  // Воспользуемся первым аргументом из усилителя redux-thunk — dispatch
-  return function (dispatch) {
-    dispatch({
-      type: GET_INGREDIENTS_REQUEST
-    })
-
-    getAllIngredients().then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: GET_INGREDIENTS_SUCCESS,
-          items: res.data
-        })
-      } else {
-        dispatch({
-          type: GET_INGREDIENTS_FAILED
-        })
-      }
-    })
+export const ingredientsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_INGREDIENTS_REQUEST: {
+      return { ...state, itemsRequest: true };
+    }
+    case GET_INGREDIENTS_SUCCESS: {
+      return { ...state, itemsFailed: false, items: action.items, itemsRequest: false, itemsLoaded: true, };
+    }
+    case GET_INGREDIENTS_FAILED: {
+      return { ...state, itemsFailed: true, itemsRequest: false };
+    }
+    default: {
+      return state;
+    }
   }
-} 
+};

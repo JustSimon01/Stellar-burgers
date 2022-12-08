@@ -5,21 +5,23 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../../../utils/PropTypes';
 import styles from './Ingredient.module.css'
+import { addIngredientInfo, deleteIngredientInfo } from '../../../../services/reducers/ingredient';
+import { useDispatch } from 'react-redux';
 
 
 const Ingredient = ({ data, mealType }) => {
-
+  const dispatch = useDispatch();
   const [modalActive, setModalActive] = useState(false);
-  const [ingredientsData, setIngredientsData] = useState(null);
 
   function handleClose() {
     setModalActive(false);
-    setIngredientsData(null);
+    dispatch(deleteIngredientInfo())
   }
 
   function handleClick() {
-    setIngredientsData(data);
+    console.log(data);
     setModalActive(true);
+    dispatch(addIngredientInfo(data));
   }
 
   if (data.type === mealType) {
@@ -36,7 +38,7 @@ const Ingredient = ({ data, mealType }) => {
         </li>
         {modalActive &&
           <Modal handleClose={handleClose}>
-            <IngredientDetails ingredientsData={ingredientsData} />
+            <IngredientDetails />
           </Modal>
         }
       </>

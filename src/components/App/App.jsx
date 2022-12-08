@@ -1,49 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import { DataContext } from '../../services/contextData';
-import { getAllIngredients } from '../../API/api';
 import { useDispatch, useSelector } from 'react-redux';
+import { getItemsData } from '../../services/actions/ingresients-data';
+
 
 function App() {
-
+  //добавить рендер при ошибке?
+  const itemsLoaded = useSelector((store) => store.ingredients.itemsLoaded);
   const dispatch = useDispatch();
-  const cash = useSelector(state => state.reducerR.cash)
-  console.log(cash)
-
-  const [state, setState] = useState({
-    isLoading: false,
-    hasError: false,
-    data: []
-  });
-
-  useState(() => {
-    const getData = () => {
-      setState({ ...state, hasError: false, isLoading: true });
-      getAllIngredients()
-        .then(({ data }) => setState({ ...state, data, isLoading: false }))
-        .catch(e => {
-          setState({ ...state, hasError: true, isLoading: false });
-        });
-    };
-
-    getData();
-
-  }, []);
-
+  useEffect(() => { dispatch(getItemsData()) }, [dispatch])
 
   return (
     <div className="App">
       <AppHeader />
-      {state.isLoading === true
+      {itemsLoaded === false
         ? <div>Загрузка...</div>
         : <main className='App-main'>
-          <DataContext.Provider value={state.data}>
-            <BurgerIngredients data={state.data} />
-            <BurgerConstructor />
-          </DataContext.Provider>
+          <BurgerIngredients />
+          <BurgerConstructor />
         </main>
       }
     </div>
