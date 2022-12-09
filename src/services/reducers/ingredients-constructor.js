@@ -1,20 +1,38 @@
-import { INGREDIENTS_CONSTRUCTOR, ADD_INGREDIENT } from '../actions/ingredients-constructor'
+import { INGREDIENTS_CONSTRUCTOR, ADD_INGREDIENT, INGREDIENT_MOVE, DELETE_INGREDIENT, ADD_BUNS } from '../actions/ingredients-constructor';
+import update from 'immutability-helper';
 
 // список всех ингредиентов в текущем конструкторе бургера,
 const initialState = {
-  ingredients: []
+  ingredients: [],
+  buns: []
 }
 
 export const ingredientsConstructorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INGREDIENTS_CONSTRUCTOR:
-      return { ...state, ingredients: [...state.ingredients, action.payload] }//подгружается только то что есть в массиве ингредиентов
+    // case INGREDIENTS_CONSTRUCTOR:
+    //   return { ...state, ingredients: [...state.ingredients, action.payload] }
+    case ADD_BUNS:
+      return { ...state, buns: action.payload }
     case ADD_INGREDIENT:
-      return { ...state, ingredients: [...state.ingredients, ...action.payload] }//подгружается только то что есть в массиве ингредиентов
+      return { ...state, ingredients: [...state.ingredients, ...action.payload] }
+    case DELETE_INGREDIENT:
+      return { ...state, ingredients: [...state.ingredients.filter((item, index) => index !== action.payload)] }
+    case INGREDIENT_MOVE:
+      return {
+        ...state, ingredients: update(state.ingredients, {
+          $splice: [
+            [action.payload.dragIndex, 1],
+            [action.payload.hoverIndex, 0, state.ingredients[action.payload.dragIndex]],
+          ],
+        })
+      }
     default:
       return state;
   }
 };
 //функция добавления ингридиента в массив бургер-конструктора
-export const setIngredientsConstructor = (payload) => ({ type: INGREDIENTS_CONSTRUCTOR, payload })
-export const addIngredientInConstructor = (payload) => ({ type: ADD_INGREDIENT, payload })
+//export const setIngredientsConstructor = (payload) => ({ type: INGREDIENTS_CONSTRUCTOR, payload });
+export const addIngredientInConstructor = (payload) => ({ type: ADD_INGREDIENT, payload });
+export const moveIngredientInConstructor = (payload) => ({ type: INGREDIENT_MOVE, payload });
+export const deleteIngredient = (payload) => ({ type: DELETE_INGREDIENT, payload });
+export const addBunsInConstructor = (payload) => ({ type: ADD_BUNS, payload });

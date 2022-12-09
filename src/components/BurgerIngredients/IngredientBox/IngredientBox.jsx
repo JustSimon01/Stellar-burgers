@@ -4,11 +4,11 @@ import { ingredientPropTypes } from '../../../utils/PropTypes';
 import styles from './IngredientBox.module.css'
 import Ingredient from './Ingredient/Ingredient';
 
-const IngredientBox = ({ titleId, title, mealType, data }) => {
+const IngredientBox = ({ titleId, title, mealType, data, innerRef }) => {
 
   return (
     <>
-      <h2 id={titleId} className='text text_type_main-medium'>{title}</h2>
+      <h2 ref={innerRef} id={titleId} className='text text_type_main-medium'>{title}</h2>
       <ul className={`${styles.ingredientsBox} ml-4 mr-4`}>
         {data.map((item) =>
           <Ingredient data={item} mealType={mealType} key={item._id} />

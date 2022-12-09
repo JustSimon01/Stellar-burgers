@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import styles from './BurgerConstructor.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
@@ -7,47 +7,33 @@ import FillingElement from './FillingElement/FillingElement';
 import BunElement from './BunElement/BunElement';
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIngredientsConstructor, addIngredientInConstructor } from '../../services/reducers/ingredients-constructor';
+import { addIngredientInConstructor, addBunsInConstructor } from '../../services/reducers/ingredients-constructor';
 import { addOrderitems, deleteOrderInfo } from '../../services/reducers/order';
 import { sentOrderInformation } from '../../services/actions/order';
+import { useDrop } from "react-dnd";
 
-function BurgerConstructor() {
+function BurgerConstructor({ onDropHandler }) {
   const dispatch = useDispatch();
-  const ingredientsArray = useSelector((store) => store.ingredients.items); //общий массив данных
+  //const ingredientsArray = useSelector((store) => store.ingredients.items); //общий массив данных
   const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
-
-  //ф-я подгрузки ингридиентов
-  const addIngrederntsInConstructor = (data) => {
-    dispatch(setIngredientsConstructor(data));
-  }
-  //ф-я добавления ингридиентов
-  const addIngredernt = (data) => {
-    console.log(data)
-    dispatch(addIngredientInConstructor([data]));
-  }
-
+  const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
+  const buns = constructorBuns;
   const [modalActive, setModalActive] = useState(false);
-  const [order, setOrder] = useState({ number: '0', array: [] });
-
-  const filling = useMemo(() => { return (ingredientsArray.filter(item => item.type !== 'bun')) }, [ingredientsArray]);
-  //const filling = [];
-  const bun = useMemo(() => { return (ingredientsArray.find(item => item.type === 'bun')) }, [ingredientsArray]);
-  //const bun = []
-  const array = useMemo(() => { return ([...filling, bun, bun]) }, [filling, bun]);  //массив из ингр. + 2 булки
-  const arrayId = array.map(item => item._id); //массив всех id для отправки заказа на сервер
 
   const total = useMemo(
     () => {
       let total = 0;
-      array.map((item) => total = total + item.price);
+      constructorIngredients.map((item) => { total = total + item.price });
+      constructorBuns.map((item) => { total = total + item.price });
       return total;
     },
-    [array]
+    [constructorIngredients, constructorBuns]
   );
 
-  function orderConfirmation(arrayId) {
-    dispatch(addOrderitems(arrayId));
-    dispatch(sentOrderInformation(arrayId));
+  function orderConfirmation() {
+    const orderArray = [...constructorIngredients, ...constructorBuns]
+    dispatch(addOrderitems(orderArray));
+    dispatch(sentOrderInformation(orderArray));
     setModalActive(true);
   }
 
@@ -56,26 +42,49 @@ function BurgerConstructor() {
     setModalActive(false);
   }
 
+  const [, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      if (item.type === 'bun') {
+        dispatch(addBunsInConstructor([item, item]));
+      } else {
+        dispatch(addIngredientInConstructor([item]));
+      }
+    },
+  });
+
+  const [buttonState, setbuttonState] = useState(true);
+  console.log(constructorBuns.length)
+  useEffect(() => {
+    if (constructorBuns.length === 0 || constructorIngredients.length === 0) {
+      setbuttonState(true)
+    } else if (constructorBuns.length > 0 && constructorIngredients.length > 0) {
+      setbuttonState(false)
+    }
+  }, [constructorBuns, constructorIngredients])
+
   return (
     <>
-      <button onClick={() => { addIngredernt(bun) }}>Закинуть данные</button>
-      <section className={`${styles.burgerConstructor}`}>
+      <section ref={dropTarget} className={`${styles.burgerConstructor}`}>
         <div className={`${styles.bun} mr-4`}>
-          <BunElement product={bun} type={"top"} isLocked={true} />
+          <BunElement type={"top"} isLocked={true} />
         </div>
-        {/* ------------------ИНГРЕДИЕНТЫ---------------------- */}
+
         <ul className={`${styles.filling} mt-4 mb-4`}>
-          {filling.map((item) => {
-            return <FillingElement data={item} key={item._id} />
-          })}
+          {constructorIngredients.length === 0
+            ? <div className={`${styles.addIngredient} text text_type_main-large pb-8`}>Добавь Ингредиент!</div>
+            : constructorIngredients.map((item, index) => {
+              return <FillingElement data={item} key={index} index={index} />
+            })
+          }
         </ul>
-        {/* --------------------------------------------------- */}
+
         <div className={`${styles.bun} mr-4`}>
-          <BunElement product={bun} type={"bottom"} isLocked={true} />
+          <BunElement type={"bottom"} isLocked={true} />
         </div>
         <div className={`${styles.orderConfirmation} mt-10 mr-4`}>
           <TotalPrice totalPrice={total} />
-          <Button type="primary" size="medium" htmlType="button" onClick={() => { orderConfirmation(constructorIngredients) }}>
+          <Button disabled={buttonState} type="primary" size="medium" htmlType="button" onClick={() => orderConfirmation()}>
             Оформить заказ
           </Button>
         </div>

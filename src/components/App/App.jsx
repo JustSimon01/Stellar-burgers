@@ -5,10 +5,11 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import { useDispatch, useSelector } from 'react-redux';
 import { getItemsData } from '../../services/actions/ingresients-data';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 
 function App() {
-  //добавить рендер при ошибке?
   const itemsLoaded = useSelector((store) => store.ingredients.itemsLoaded);
   const dispatch = useDispatch();
   useEffect(() => { dispatch(getItemsData()) }, [dispatch])
@@ -19,8 +20,10 @@ function App() {
       {itemsLoaded === false
         ? <div>Загрузка...</div>
         : <main className='App-main'>
-          <BurgerIngredients />
-          <BurgerConstructor />
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         </main>
       }
     </div>

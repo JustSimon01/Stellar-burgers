@@ -19,6 +19,13 @@
   align-items: flex-end;
 }
 
+.addIngredient {
+  display: flex;
+  align-self: center;
+  margin: auto;
+  padding: 0;
+}
+
 .filling::-webkit-scrollbar {
   width: 8px;
   /* ширина для вертикального скролла */

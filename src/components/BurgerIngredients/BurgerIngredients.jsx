@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerIngredients.module.css';
 import IngredientBox from './IngredientBox/IngredientBox'
 import { useSelector } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
 
 function BurgerIngredients() {
+  const data = useSelector((store) => store.ingredients.items); //подгрузка данных из стора
 
-  const data = useSelector((store) => store.ingredients.items); // временная подгрузка данных
-
-  const [current, setCurrent] = useState('buns')
+  const [current, setCurrent] = useState('buns'); //стейт табов
 
   function handleButtonClick(tab) {
     setCurrent(tab);
     const element = document.getElementById(tab);
-    console.log(element);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   }
+
+  const [bunsRef, bunsInView] = useInView({ threshold: 0 });
+  const [sausesRef, sausesInView] = useInView({ threshold: 0 });
+  const [mainRef, mainInView] = useInView({ threshold: 0 });
+
+  useEffect(() => {
+    if (bunsInView) {
+      setCurrent("buns");
+    } else if (sausesInView) {
+      setCurrent("sauces");
+    } else if (mainInView) {
+      setCurrent("main");
+    }
+  }, [bunsInView, sausesInView, mainInView]);
 
   return (
     <section className={`${styles.burgerIngredients} pt-10'`}>
@@ -32,14 +45,12 @@ function BurgerIngredients() {
         </Tab>
       </div>
       <div className={`${styles.blockWithScroll}`}>
-        <IngredientBox titleId={"buns"} title={'Булки'} mealType={'bun'} data={data} />
-        <IngredientBox titleId={"sauces"} title={'Соусы'} mealType={'sauce'} data={data} />
-        <IngredientBox titleId={"main"} title={'Начинки'} mealType={'main'} data={data} />
+        <IngredientBox innerRef={bunsRef} titleId={"buns"} title={'Булки'} mealType={'bun'} data={data} />
+        <IngredientBox innerRef={sausesRef} titleId={"sauces"} title={'Соусы'} mealType={'sauce'} data={data} />
+        <IngredientBox innerRef={mainRef} titleId={"main"} title={'Начинки'} mealType={'main'} data={data} />
       </div>
     </section>
   )
 }
-
-
 
 export default BurgerIngredients;
