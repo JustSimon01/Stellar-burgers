@@ -12,12 +12,12 @@ import { addOrderitems, deleteOrderInfo } from '../../services/reducers/order';
 import { sentOrderInformation } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
 
-function BurgerConstructor({ onDropHandler }) {
+function BurgerConstructor() {
   const dispatch = useDispatch();
-  //const ingredientsArray = useSelector((store) => store.ingredients.items); //общий массив данных
+
   const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
   const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
-  const buns = constructorBuns;
+
   const [modalActive, setModalActive] = useState(false);
 
   const total = useMemo(
@@ -48,13 +48,12 @@ function BurgerConstructor({ onDropHandler }) {
       if (item.type === 'bun') {
         dispatch(addBunsInConstructor([item, item]));
       } else {
-        dispatch(addIngredientInConstructor([item]));
+        dispatch(addIngredientInConstructor([{ ...item, id: constructorIngredients.length }]));
       }
     },
   });
 
   const [buttonState, setbuttonState] = useState(true);
-  console.log(constructorBuns.length)
   useEffect(() => {
     if (constructorBuns.length === 0 || constructorIngredients.length === 0) {
       setbuttonState(true)
@@ -74,7 +73,7 @@ function BurgerConstructor({ onDropHandler }) {
           {constructorIngredients.length === 0
             ? <div className={`${styles.addIngredient} text text_type_main-large pb-8`}>Добавь Ингредиент!</div>
             : constructorIngredients.map((item, index) => {
-              return <FillingElement data={item} key={index} index={index} />
+              return <FillingElement data={item} key={index} index={index} id={item.id} />
             })
           }
         </ul>

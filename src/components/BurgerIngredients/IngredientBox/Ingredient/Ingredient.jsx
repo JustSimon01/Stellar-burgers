@@ -11,15 +11,16 @@ import { useDrag } from "react-dnd";
 
 const Ingredient = ({ data, mealType }) => {
   const dispatch = useDispatch();
-  const [modalActive, setModalActive] = useState(false);
-  const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
 
-  //const count = (data) => console.log(constructorIngredients.filter(item => item._id === data._id));
+  const [modalActive, setModalActive] = useState(false);
+
+  const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients);
+  const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
 
   const count = useMemo(() => {
-    return constructorIngredients.filter(item => item._id === data._id).length;
-  }, [constructorIngredients])
-
+    const allIngredients = [...constructorIngredients, ...constructorBuns]
+    return allIngredients.filter(item => item._id === data._id).length;
+  }, [constructorIngredients, constructorBuns])
 
   function handleClose() {
     setModalActive(false);
@@ -27,12 +28,11 @@ const Ingredient = ({ data, mealType }) => {
   }
 
   function handleClick() {
-    console.log(data);
     setModalActive(true);
     dispatch(addIngredientInfo(data));
   }
 
-  const { id, content } = data;
+  //const { id, content } = data;
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: data,

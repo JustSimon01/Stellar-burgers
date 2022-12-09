@@ -7,26 +7,20 @@ import { useDrag, useDrop } from 'react-dnd/dist/hooks';
 import { useDispatch } from 'react-redux';
 import { moveIngredientInConstructor, deleteIngredient } from '../../../services/reducers/ingredients-constructor';
 
-const FillingElement = ({ data, index }) => {
+const FillingElement = ({ data, index, id }) => {
   const dispatch = useDispatch();
-  const id = data._id;
-
-  console.log(index, id)
-
   const ref = useRef(null)
-  const [{ handlerId }, drop] = useDrop({
+
+  const [, drop] = useDrop({
     accept: "filling",
-    collect(monitor) {
-      return {
-        handlerId: monitor.getHandlerId(),
-      }
-    },
+    collect() { },
     hover(item, monitor) {
       if (!ref.current) {
-        return
+        return;
       }
       const dragIndex = item.index;
       const hoverIndex = index;
+
       if (dragIndex === hoverIndex) {
         return;
       }
@@ -58,13 +52,15 @@ const FillingElement = ({ data, index }) => {
       isDragging: monitor.isDragging(),
     }),
   })
-
+  // поставил 0.3 для наглядности, я не могу найти ошибку. Элемент становится прозрачным,
+  // но при перетаскивании прозрачность за ним не следует и остается элементе клика
+  // будто перерендериваются не все элементы, а только данные в них
   const opacity = isDragging ? 0.3 : 1;
 
   drag(drop(ref));
 
   return (
-    <li ref={ref} style={{ opacity }} data-handler-id={handlerId} className={`${styles.fillingElement}  mr-2`}>
+    <li ref={ref} draggable={true} style={{ opacity }} className={`${styles.fillingElement}  mr-2`}>
       <DragIcon type="primary" />
       <ConstructorElement className={`${styles.constructorWidth}`}
         text={data.name}

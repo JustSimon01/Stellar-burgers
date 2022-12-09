@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ingredientPropTypes } from '../../../utils/PropTypes';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import emptyBurger from '../../../images/empty-burger.png';
 
 const BunElement = ({ type, isLocked }) => {
