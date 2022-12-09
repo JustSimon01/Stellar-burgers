@@ -1,28 +1,26 @@
 import React from 'react';
 import { Logo, BurgerIcon, ProfileIcon, ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import MenuSection from './MenuSection/MenuSection';
-/* eslint-disable */
-//данные стили используются, но eslint выдает предупреждения в терминале
-import AppHeaderStyles from './AppHeader.css';
-/* eslint-disable */
+import styles from './AppHeader.module.css';
 
-class AppHeader extends React.Component {
-  render() {
-    return (
-      <header className="app-header text text_type_main-default">
-        <menu className='app-header-menu'>
-          <div className='app-header-menu-left'>
-            <MenuSection text="Конструктор" active={true}><BurgerIcon type="primary" /></MenuSection>
-            <MenuSection text="Лента заказов"><ListIcon type="secondary" /></MenuSection>
-          </div>
-          <div className="app-header-logo"><Logo /></div>
-          <div className='app-header-menu-right'>
-            <MenuSection text="Личный кабинет"><ProfileIcon type="secondary" /></MenuSection>
-          </div>
-        </menu>
-      </header>
-    )
-  }
+
+function AppHeader() {
+
+  return (
+    <header className={`${styles.appHeader} text text_type_main-default`}>
+      <menu className={styles.appHeaderMenu}>
+        <div className={styles.appHeaderMenuLeft}>
+          <MenuSection text="Конструктор" active={true}><BurgerIcon type="primary" /></MenuSection>
+          <MenuSection text="Лента заказов"><ListIcon type="secondary" /></MenuSection>
+        </div>
+        <div className={styles.appHeaderLogo}><Logo /></div>
+        <div className={styles.appHeaderMenuRight}>
+          <MenuSection text="Личный кабинет"><ProfileIcon type="secondary" /></MenuSection>
+        </div>
+      </menu>
+    </header>
+  )
+
 }
 
 export default AppHeader;

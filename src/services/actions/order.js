@@ -15,17 +15,19 @@ export function sentOrderInformation(array) {
     })
 
     postOrderInfo(array).then(res => {
-      console.log(res.order.number)
       if (res && res.success) {
         dispatch({
           type: GET_ORDER_NUMBER_SUCCESS,
           payload: res.order.number
         })
-      } else {
-        dispatch({
-          type: GET_ORDER_NUMBER_FAILED
-        })
       }
+    }).catch(e => {
+      dispatch({
+        type: GET_ORDER_NUMBER_FAILED,
+      })
     })
   }
-} 
+}
+
+export const addOrderitems = (payload) => ({ type: ADD_ORDER_ITEMS, payload });
+export const deleteOrderInfo = () => ({ type: DELETE_ORDER_INFO })

@@ -1,4 +1,3 @@
-
 const config = {
   baseURL: 'https://norma.nomoreparties.space/api',
   headers: {

@@ -19,11 +19,11 @@ export function getItemsData() {
           type: GET_INGREDIENTS_SUCCESS,
           items: res.data
         })
-      } else {
-        dispatch({
-          type: GET_INGREDIENTS_FAILED
-        })
       }
+    }).catch(e => {
+      dispatch({
+        type: GET_INGREDIENTS_FAILED,
+      })
     })
   }
 } 

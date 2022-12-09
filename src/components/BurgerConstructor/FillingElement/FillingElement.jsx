@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import styles from './FillingElement.module.css';
+import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../../utils/PropTypes';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd/dist/hooks';
 import { useDispatch } from 'react-redux';
-import { moveIngredientInConstructor, deleteIngredient } from '../../../services/reducers/ingredients-constructor';
+import { moveIngredientInConstructor, deleteIngredient } from '../../../services/actions/ingredients-constructor';
 
 const FillingElement = ({ data, index, id }) => {
   const dispatch = useDispatch();
@@ -52,10 +53,8 @@ const FillingElement = ({ data, index, id }) => {
       isDragging: monitor.isDragging(),
     }),
   })
-  // поставил 0.3 для наглядности, я не могу найти ошибку. Элемент становится прозрачным,
-  // но при перетаскивании прозрачность за ним не следует и остается элементе клика
-  // будто перерендериваются не все элементы, а только данные в них
-  const opacity = isDragging ? 0.3 : 1;
+
+  const opacity = isDragging ? 0 : 1;
 
   drag(drop(ref));
 
@@ -73,6 +72,8 @@ const FillingElement = ({ data, index, id }) => {
 }
 FillingElement.propTypes = {
   data: ingredientPropTypes.isRequired,
+  index: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired
 }
 
 export default FillingElement;

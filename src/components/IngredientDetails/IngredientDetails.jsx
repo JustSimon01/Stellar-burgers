@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './IngredientDetails.module.css';
-import { ingredientPropTypes } from '../../utils/PropTypes'
 import { useSelector } from 'react-redux';
-
 
 function IngredientDetails() {
 
@@ -12,7 +10,7 @@ function IngredientDetails() {
   return (
     <div className={`${styles.ingredientDetails} pt-10 pl-10 pr-10 pb-60`}>
       <h2 className={`${styles.ingredientHeader} text text_type_main-large`}> Детали ингредиента</h2 >
-      <img className={`${styles.ingredientImage}`} alt="картинка ингредиента" src={ingredientInfo.image_large} />
+      <img className={`${styles.ingredientImage}`} alt={ingredientInfo.name} src={ingredientInfo.image_large} />
       <h3 className={`${styles.ingredientName} text text_type_main-medium pt-4 pb-8`} > {ingredientInfo.name}</h3 >
       <ul className={`${styles.nutritionalBlock} mt-8 mb-15`} >
         <li className={`${styles.nutritionalValue}`} >
@@ -34,10 +32,6 @@ function IngredientDetails() {
       </ul >
     </div >
   );
-}
-
-IngredientDetails.propTypes = {
-  ingredientInfo: ingredientPropTypes.isRequired
 }
 
 export default IngredientDetails;

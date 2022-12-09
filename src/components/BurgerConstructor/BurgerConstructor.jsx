@@ -7,16 +7,18 @@ import FillingElement from './FillingElement/FillingElement';
 import BunElement from './BunElement/BunElement';
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredientInConstructor, addBunsInConstructor } from '../../services/reducers/ingredients-constructor';
-import { addOrderitems, deleteOrderInfo } from '../../services/reducers/order';
+import { addIngredientInConstructor, addBunsInConstructor, deleteAllIngredients } from '../../services/actions/ingredients-constructor';
+import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
 import { sentOrderInformation } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
+import { v4 as uuidv4 } from "uuid";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
 
   const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
   const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
+  const orderIsLoaded = useSelector((store) => store.orderInformation.isLoaded);
 
   const [modalActive, setModalActive] = useState(false);
 
@@ -39,6 +41,7 @@ function BurgerConstructor() {
 
   function closeModal() {
     dispatch(deleteOrderInfo());
+    dispatch(deleteAllIngredients());
     setModalActive(false);
   }
 
@@ -48,12 +51,13 @@ function BurgerConstructor() {
       if (item.type === 'bun') {
         dispatch(addBunsInConstructor([item, item]));
       } else {
-        dispatch(addIngredientInConstructor([{ ...item, id: constructorIngredients.length }]));
+        dispatch(addIngredientInConstructor({ ...item, id: uuidv4() }));
       }
     },
   });
 
   const [buttonState, setbuttonState] = useState(true);
+
   useEffect(() => {
     if (constructorBuns.length === 0 || constructorIngredients.length === 0) {
       setbuttonState(true)
@@ -73,7 +77,7 @@ function BurgerConstructor() {
           {constructorIngredients.length === 0
             ? <div className={`${styles.addIngredient} text text_type_main-large pb-8`}>Добавь Ингредиент!</div>
             : constructorIngredients.map((item, index) => {
-              return <FillingElement data={item} key={index} index={index} id={item.id} />
+              return <FillingElement data={item} key={item.id} index={index} id={item.id} />
             })
           }
         </ul>
@@ -83,12 +87,13 @@ function BurgerConstructor() {
         </div>
         <div className={`${styles.orderConfirmation} mt-10 mr-4`}>
           <TotalPrice totalPrice={total} />
-          <Button disabled={buttonState} type="primary" size="medium" htmlType="button" onClick={() => orderConfirmation()}>
+          <Button disabled={buttonState} type="primary" size="medium" htmlType="button" onClick={orderConfirmation}>
             Оформить заказ
           </Button>
         </div>
-        {modalActive &&
-          <Modal handleClose={() => closeModal()}>
+        {
+          modalActive &&
+          <Modal handleClose={closeModal}>
             <OrderDetails />
           </Modal>
         }

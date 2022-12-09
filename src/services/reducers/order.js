@@ -5,6 +5,7 @@ const initialState = {
   orderNumber: null,
   orderNumberRequest: false,
   orderNumberFailed: false,
+  isLoaded: false,
   orderItems: [],
 };
 
@@ -13,17 +14,14 @@ export const orderReducer = (state = initialState, action) => {
     case GET_ORDER_NUMBER_REQUEST:
       return { ...state, orderNumberRequest: true };
     case GET_ORDER_NUMBER_SUCCESS:
-      return { ...state, orderNumber: action.payload, orderNumberRequest: false, orderNumberFailed: false, };
+      return { ...state, orderNumber: action.payload, orderNumberRequest: false, orderNumberFailed: false, isLoaded: true };
     case GET_ORDER_NUMBER_FAILED:
       return { ...state, orderNumberRequest: false, orderNumberFailed: true, };
     case ADD_ORDER_ITEMS:
       return { ...state, orderItems: action.payload };
     case DELETE_ORDER_INFO:
-      return { ...state, orderItems: [], orderNumber: null, orderNumberRequest: false, orderNumberFailed: false, };
+      return { ...state, orderItems: [], orderNumber: null, orderNumberRequest: false, orderNumberFailed: false, isLoaded: false };
     default:
       return state;
   }
 }
-
-export const addOrderitems = (payload) => ({ type: ADD_ORDER_ITEMS, payload });
-export const deleteOrderInfo = () => ({ type: DELETE_ORDER_INFO })

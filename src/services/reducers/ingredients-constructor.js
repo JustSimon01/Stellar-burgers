@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, INGREDIENT_MOVE, DELETE_INGREDIENT, ADD_BUNS } from '../actions/ingredients-constructor';
+import { ADD_INGREDIENT, INGREDIENT_MOVE, DELETE_INGREDIENT, ADD_BUNS, DELETE_ALL_INGREDIENTS } from '../actions/ingredients-constructor';
 import update from 'immutability-helper';
 
 // список всех ингредиентов в текущем конструкторе бургера,
@@ -12,9 +12,11 @@ export const ingredientsConstructorReducer = (state = initialState, action) => {
     case ADD_BUNS:
       return { ...state, buns: action.payload }
     case ADD_INGREDIENT:
-      return { ...state, ingredients: [...state.ingredients, ...action.payload] }
+      return { ...state, ingredients: [...state.ingredients, action.payload] }
     case DELETE_INGREDIENT:
       return { ...state, ingredients: [...state.ingredients.filter((item, index) => index !== action.payload)] }
+    case DELETE_ALL_INGREDIENTS:
+      return { ...state, ingredients: [], buns: [] }
     case INGREDIENT_MOVE:
       return {
         ...state,
@@ -29,8 +31,3 @@ export const ingredientsConstructorReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export const addIngredientInConstructor = (payload) => ({ type: ADD_INGREDIENT, payload });
-export const moveIngredientInConstructor = (payload) => ({ type: INGREDIENT_MOVE, payload });
-export const deleteIngredient = (payload) => ({ type: DELETE_INGREDIENT, payload });
-export const addBunsInConstructor = (payload) => ({ type: ADD_BUNS, payload });
