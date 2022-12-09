@@ -1,0 +1,63 @@
+.burgerConstructor {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 0 51px;
+  width: 600px;
+  max-height: 912px;
+  text-align: left;
+}
+
+.filling {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 464px;
+  overflow-y: scroll;
+  align-items: flex-end;
+}
+
+.addIngredient {
+  display: flex;
+  align-self: center;
+  margin: auto;
+  padding: 0;
+}
+
+.filling::-webkit-scrollbar {
+  width: 8px;
+  /* ширина для вертикального скролла */
+  background-color: #2F2F37;
+}
+
+/* ползунок скроллбара */
+.filling::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.filling::-webkit-scrollbar-thumb:hover {
+  background-color: #6d6dac;
+
+}
+
+.bun {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.totalCost {
+  display: flex;
+  flex-direction: row;
+  gap: 9.5px;
+  align-items: center;
+}
+
+.orderConfirmation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  justify-content: flex-end;
+}

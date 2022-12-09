@@ -1,0 +1,40 @@
+.ingredientDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nutritionalBlock {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 20px;
+}
+
+.nutritionalValue {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 8px;
+  color: #8585AD;
+}
+
+.ingredientHeader {
+  display: flex;
+  align-items: center;
+  width: 640px;
+  height: 64px;
+}
+
+.ingredientImage {
+  width: 480px;
+  height: 240px;
+}
+
+.ingredientName {
+  text-align: center;
+  width: 520px;
+}
