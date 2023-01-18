@@ -23,6 +23,17 @@ export function postOrderInfo(array) {
   })
     .then(res => checkResponse(res))
 }
+//запрос на сброс пароля
+export function postForgotPassword(email) {
+  return fetch(`${config.baseURL}/password-reset`, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      "email": `${email}`
+    })
+  })
+    .then(res => checkResponse(res))
+}
 
 //проверка запросов
 function checkResponse(res) {
