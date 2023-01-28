@@ -1,31 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input, EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './forgot-password.module.css'
 import { Link } from 'react-router-dom';
+import { postForgotPassword } from '../../API/api';
 
 function ForgotPassword() {
 
-  const [email, setEmail] = React.useState('')
+  const [email, setEmail] = useState('')
 
   const onChange = e => {
     setEmail(e.target.value);
   }
-
-  function postForgotPassword(email) {
-    return fetch('https://norma.nomoreparties.space/api/password-reset', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "email": `${email}`
-      })
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
-  }
-
-
 
   return (
     <div className={styles.login}>

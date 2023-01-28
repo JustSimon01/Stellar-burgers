@@ -35,3 +35,7 @@
   text-decoration: none;
   color: #4C4CFF;
 }
+
+.error {
+  color: #ff1919;
+}

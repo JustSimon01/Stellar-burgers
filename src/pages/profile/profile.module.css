@@ -1,19 +1,41 @@
-.login {
+.profilePage {
+  display: flex;
+  flex-direction: row;
+  margin: 180px auto auto;
+  max-width: 1240px;
+}
+
+.links {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  color: #8585AD;
   padding: 0;
-  width: 480px;
-  height: 430px;
-  margin: 180px auto 0;
+  width: 320px;
+  height: fit-content;
   border: 1px dashed lightcyan;
 }
 
-.title {
-  margin: 0;
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8585AD;
+  height: 64px;
+}
+
+.active {
+  color: #F2F2F3;
+}
+
+.text {
+  text-align: start;
+  color: #8585AD;
+  opacity: 0.4;
 }
 
 .form {
+  border: 1px dashed lightcyan;
   display: grid;
   gap: 24px;
   padding: 24px 0 80px 0;
@@ -29,9 +51,4 @@
 .resetPassword {
   margin: 0;
   color: #8585AD;
-}
-
-.link {
-  text-decoration: none;
-  color: #4C4CFF;
 }
