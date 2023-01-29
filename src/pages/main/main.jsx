@@ -11,9 +11,9 @@ import { Navigate } from 'react-router-dom';
 function MainPage() {
   const itemsLoaded = useSelector((store) => store.ingredients.itemsLoaded);
   const userData = useSelector((store) => store.userInfo); //подгрузка данных из стора
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => { dispatch(getItemsData()) }, [dispatch])
+  //useEffect(() => { dispatch(getItemsData()) }, [dispatch])
 
   return (
     <>

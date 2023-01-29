@@ -11,16 +11,18 @@ function ProtectedRouteElement({ isPrivate, element }) {
   const dispatch = useDispatch();
 
 
-  console.log(location)
+  //console.log(location)
   useEffect(() => {
     dispatch(getUserData());
   }, []);
 
   if (!isPrivate && isAuthenticated) {
+    console.log("!isPrivate", location)
     return <Navigate to={location.state ? location.state.from.pathname : "/"} replace state={{ from: location }} />;
   }
 
   if (isPrivate && !isAuthenticated) {
+    console.log("isPrivate", location)
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
