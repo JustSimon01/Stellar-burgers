@@ -4,13 +4,10 @@ import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../../services/actions/login';
-import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 
 function Login() {
   const userData = useSelector((store) => store.userInfo); //подгрузка данных из стора
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const [loginInfo, setLoginInfo] = useState(
     {
@@ -21,7 +18,6 @@ function Login() {
   const onChange = e => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
   }
-  console.log(location)
 
   const auth = (e) => {
     e.preventDefault();

@@ -39,7 +39,7 @@
   display: grid;
   gap: 24px;
   padding: 24px 0 80px 0;
-  justify-items: center;
+  justify-items: end;
 }
 
 .newUser {
@@ -51,4 +51,9 @@
 .resetPassword {
   margin: 0;
   color: #8585AD;
+}
+
+.buttons {
+  display: flex;
+
 }

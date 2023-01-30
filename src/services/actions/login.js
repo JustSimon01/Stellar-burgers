@@ -1,4 +1,4 @@
-import { login, logout, getUser, resetToken } from '../../API/api'
+import { login, logout, getUser, resetToken, updateUser } from '../../API/api'
 import { setCookie, getCookie, deleteCookie } from '../../utils/cooke';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
@@ -9,6 +9,10 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_DATA_REQUEST = 'USER_DATA_REQUEST';
 export const USER_DATA_SUCCESS = 'USER_DATA_SUCCESS';//получаем только данные по сохраненным accessToken в куках
 export const USER_DATA_FAILED = 'USER_DATA_FAILED';//рефрешим accessToken в куках через REFRESH_ACCESS_TOKEN_REQUEST
+
+export const USER_DATA_UPDATE_REQUEST = 'USER_DATA_REQUEST';
+export const USER_DATA_UPDATE_SUCCESS = 'USER_DATA_UPDATE';
+export const USER_DATA_UPDATE_FAILED = 'USER_DATA_FAILED';//рефрешим accessToken в куках через REFRESH_ACCESS_TOKEN_REQUEST
 
 export const REFRESH_ACCESS_TOKEN_REQUEST = 'REFRESH_ACCESS_TOKEN_REQUEST';
 export const REFRESH_ACCESS_TOKEN_SUCCESS = 'REFRESH_ACCESS_TOKEN_SUCCESS';//рефрешим accessToken и отправляем запрос на данные
@@ -59,7 +63,6 @@ export function getUserData() {
     });
     getUser().then(res => {
       if (res && res.success) {
-        console.log(res, "sakes");
         dispatch({
           type: USER_DATA_SUCCESS,
           payload: res
@@ -74,13 +77,32 @@ export function getUserData() {
   }
 }
 
+export function updateUserData(data) {
+  return function (dispatch) {
+    dispatch({
+      type: USER_DATA_UPDATE_REQUEST
+    });
+    updateUser(data).then(res => {
+      if (res && res.success) {
+        dispatch({
+          type: USER_DATA_UPDATE_SUCCESS,
+          payload: res
+        });
+      }
+    }).catch(e => {
+      dispatch({
+        type: USER_DATA_UPDATE_FAILED,
+      });
+    })
+  }
+}
+
 export function refreshToken() {
   return function (dispatch) {
     dispatch({
       type: REFRESH_ACCESS_TOKEN_REQUEST
     });
     resetToken().then(res => {
-      console.log(res);
       if (res && res.success) {
         dispatch({
           type: REFRESH_ACCESS_TOKEN_SUCCESS,

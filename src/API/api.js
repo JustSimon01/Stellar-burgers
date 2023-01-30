@@ -25,6 +25,7 @@ export function postOrderInfo(array) {
   })
     .then(res => checkResponse(res))
 }
+
 //запрос на получение письма для сброса пароля
 export function postForgotPassword(email) {
   return fetch(`${config.baseURL}/password-reset`, {
@@ -35,7 +36,6 @@ export function postForgotPassword(email) {
     })
   })
     .then(res => checkResponse(res))
-    .then(data => console.log(data))
 }
 
 //запрос на обновление пароля
@@ -51,7 +51,6 @@ export function postResetPassword(password, token) {
     )
   })
     .then(res => checkResponse(res))
-    .then(data => console.log(data))
 }
 
 //создание пользователя
@@ -68,7 +67,6 @@ export function postNewUser(email, password, name) {
     )
   })
     .then(res => checkResponse(res))
-    .then(data => console.log(data))
 }
 
 //авторизация
@@ -94,6 +92,20 @@ export function getUser() {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + getCookie('accessToken')
     },
+  })
+    .then(res => checkResponse(res))
+}
+
+//обновление данных пользователя через профиль
+
+export function updateUser(data) {
+  return fetch(`${config.baseURL}/auth/user`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + getCookie('accessToken')
+    },
+    body: JSON.stringify(data)
   })
     .then(res => checkResponse(res))
 }

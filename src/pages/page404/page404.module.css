@@ -1,0 +1,13 @@
+.block {
+  width: fit-content;
+  display: grid;
+  grid-column: auto;
+  gap: 20px;
+  align-items: center;
+  margin: 200px auto;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+}

@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-
+  const { isAuthenticated } = useSelector((store) => store.userInfo);
   const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
   const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
   const orderIsLoaded = useSelector((store) => store.orderInformation.isLoaded);
@@ -61,7 +61,7 @@ function BurgerConstructor() {
   useEffect(() => {
     if (constructorBuns.length === 0 || constructorIngredients.length === 0) {
       setbuttonState(true)
-    } else if (constructorBuns.length > 0 && constructorIngredients.length > 0) {
+    } else if ((constructorBuns.length > 0 && constructorIngredients.length > 0) && isAuthenticated) {
       setbuttonState(false)
     }
   }, [constructorBuns, constructorIngredients])

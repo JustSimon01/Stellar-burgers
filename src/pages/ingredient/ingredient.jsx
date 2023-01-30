@@ -1,17 +1,17 @@
 import React from 'react';
-import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import styles from './ingredient.module.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 function Ingredient() {
-
+  const navigate = useNavigate();
   const { id } = useParams();
   const itemsLoaded = useSelector((store) => store.ingredients.items);
   const ingredientInfo = itemsLoaded.find(item => item._id === id);
 
   if (itemsLoaded && !ingredientInfo) {
-    return (<>Ошибка!</>)//сделать отвод на 404
+    return (navigate('/*'))
   }
 
   return (

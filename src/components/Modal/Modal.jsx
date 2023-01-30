@@ -5,7 +5,6 @@ import styles from './Modal.module.css'
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
 function Modal({ children, handleClose }) {
-
   useEffect(() => {
     const closeEsc = (e) => (e.key === 'Escape' ? handleClose() : null)
     document.addEventListener('keydown', closeEsc);
@@ -25,7 +24,6 @@ function Modal({ children, handleClose }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.object.isRequired,
   handleClose: PropTypes.func.isRequired
 }
 

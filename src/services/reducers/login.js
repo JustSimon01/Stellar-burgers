@@ -8,9 +8,11 @@ import {
   USER_DATA_FAILED,
   REFRESH_ACCESS_TOKEN_FAILED,
   REFRESH_ACCESS_TOKEN_SUCCESS,
-  REFRESH_ACCESS_TOKEN_REQUEST
+  REFRESH_ACCESS_TOKEN_REQUEST,
+  USER_DATA_UPDATE_REQUEST,
+  USER_DATA_UPDATE_SUCCESS,
+  USER_DATA_UPDATE_FAILED
 } from '../actions/login';
-import { setCookie } from '../../utils/cooke';
 
 const initialState = {
   loginRequest: false,
@@ -18,6 +20,8 @@ const initialState = {
   userDataLoaded: false,
   userDataRequest: false,
   userDataRequestFailed: false,
+  userDataUpdateRequest: false,
+  userDataUpdateFailed: false,
   accessTokenRequest: false,
   accessTokenRequestFailed: false,
   isAuthenticated: false,
@@ -64,7 +68,6 @@ export const userInfoReducer = (state = initialState, action) => {
     case USER_DATA_REQUEST:
       return { ...state, userDataRequest: true };
     case USER_DATA_SUCCESS:
-      console.log(action.payload.user);
       return {
         ...state,
         userDataRequest: false,
@@ -73,7 +76,19 @@ export const userInfoReducer = (state = initialState, action) => {
         user: action.payload.user,
       };
     case USER_DATA_FAILED:
-      return { ...state, userDataRequest: false, userDataRequestFailed: true, };
+      return { ...state, userDataRequest: false };
+
+    case USER_DATA_UPDATE_REQUEST:
+      return { ...state, userDataUpdateRequest: true };
+    case USER_DATA_UPDATE_SUCCESS:
+      return {
+        ...state, userDataUpdateRequest: false,
+        userDataUpdateFailed: false,
+        user: action.payload.user
+      };
+    case USER_DATA_UPDATE_FAILED:
+      return { ...state, userDataRequest: false, userDataUpdateFailed: true };
+
     case REFRESH_ACCESS_TOKEN_REQUEST:
       return { ...state, accessTokenRequest: true };
     case REFRESH_ACCESS_TOKEN_SUCCESS:
