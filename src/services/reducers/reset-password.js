@@ -24,6 +24,7 @@ export const resetPasswordReducer = (state = initialState, action) => {
         ...state,
         emailRequest: false,
         verificationSent: action.payload,
+        emailRequestFailed: false,
       }
     case VERIFICATION_EMAIL_FAILED:
       return {

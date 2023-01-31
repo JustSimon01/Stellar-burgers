@@ -1,30 +1,33 @@
 import { postForgotPassword, postResetPassword } from '../../API/api'
 
-export const VERIFICATION_EMAIL_REQUEST = 'USER_LOGIN_REQUEST';
-export const VERIFICATION_EMAIL_SUCCESS = 'USER_LOGIN_SUCCESS';//впервые получаем данные пользователя, токены и сохраняем куки.
-export const VERIFICATION_EMAIL_FAILED = 'USER_LOGIN_FAILED';
+export const VERIFICATION_EMAIL_REQUEST = 'VERIFICATION_EMAIL_REQUEST';
+export const VERIFICATION_EMAIL_SUCCESS = 'VERIFICATION_EMAIL_SUCCESS';//впервые получаем данные пользователя, токены и сохраняем куки.
+export const VERIFICATION_EMAIL_FAILED = 'VERIFICATION_EMAIL_FAILED';
 
-export const RESET_PASSWORD_REQUEST = 'USER_LOGIN_REQUEST';
-export const RESET_PASSWORD_SUCCESS = 'USER_LOGIN_SUCCESS';//впервые получаем данные пользователя, токены и сохраняем куки.
-export const RESET_PASSWORD_FAILED = 'USER_LOGIN_FAILED';
+export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';//впервые получаем данные пользователя, токены и сохраняем куки.
+export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
 
-export function sentVerificationEmail(email) {
+export function sentVerificationEmail(email, goToPage) {
   return function (dispatch) {
     dispatch({
       type: VERIFICATION_EMAIL_REQUEST
     });
-    postForgotPassword(email).then(res => {
-      if (res && res.success) {
+    postForgotPassword(email)
+      .then(res => {
+        if (res && res.success) {
+          dispatch({
+            type: VERIFICATION_EMAIL_SUCCESS,
+            payload: res
+          })
+        }
+      })
+      .then(goToPage())
+      .catch(e => {
         dispatch({
-          type: VERIFICATION_EMAIL_SUCCESS,
-          payload: res
+          type: VERIFICATION_EMAIL_FAILED,
         });
-      }
-    }).catch(e => {
-      dispatch({
-        type: VERIFICATION_EMAIL_FAILED,
-      });
-    })
+      })
   }
 }
 
@@ -37,7 +40,6 @@ export function resetPassword(password, token) {
       if (res && res.success) {
         dispatch({
           type: RESET_PASSWORD_SUCCESS,
-          payload: res
         });
       }
     }).catch(e => {
