@@ -1,0 +1,21 @@
+.frame {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(to right, rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+  border-radius: 100px;
+  position: relative;
+}
+
+.img {
+  margin: auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  background-color: #1C1C21;
+  ;
+}
+
+.intersection {
+  margin-right: -15px;
+}

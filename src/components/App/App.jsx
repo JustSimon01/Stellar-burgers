@@ -16,6 +16,10 @@ import { getItemsData } from '../../services/actions/ingresients-data';
 import { useDispatch } from 'react-redux';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import { getUserData } from '../../services/actions/login';
+import ProfileInfo from '../ProfileInfo/ProfileInfo';
+import Orders from '../Orders/Orders';
+import Order from '../../pages/order/order';
+import Feed from '../../pages/feed/feed';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,12 +35,19 @@ function App() {
       <Routes location={background || location}>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<ProtectedRouteElement element={<Login />} />} />
-        <Route path="/profile" element={<ProtectedRouteElement isPrivate element={<Profile />} />} />
+        <Route path="/profile" element={<ProtectedRouteElement isPrivate element={<Profile />} />}>
+          <Route path="" element={<ProfileInfo />} />
+          <Route path="orders" element={<Orders />} />
+        </Route>
+        <Route path="/profile/orders/id" element={<ProtectedRouteElement isPrivate element={<Order />} />} />
         <Route path="/register" element={<ProtectedRouteElement element={<Register />} />} />
         <Route path="/reset-password" element={<ProtectedRouteElement element={<ResetPassword />} />} />
         <Route path="/forgot-password" element={<ProtectedRouteElement element={<ForgotPassword />} />} />
         <Route path="/ingredients/:id" element={<Ingredient />} />
+        <Route path="/feed" element={<Feed />} />
         <Route path="/*" element={<Page404 />} />
+        {/* <Route path="/feed" element={} />
+        <Route path="/feed/:id" element={} /> */}
       </Routes>
       {background && <Routes> <Route path="/ingredients/:id" element={<Modal handleClose={() => { navigate(-1) }}> <IngredientDetails /></Modal>} /> </Routes>}
     </div>

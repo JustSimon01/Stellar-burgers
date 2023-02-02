@@ -1,0 +1,51 @@
+.page {
+  max-width: 1240px;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+
+.header {}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+}
+
+.ordersTemplate {
+  max-width: 580px;
+  width: 100%;
+  border: 1px dashed whitesmoke;
+}
+
+.ordersStatus {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.table {
+  height: 206px;
+  width: 272px;
+  border: 1px dashed rgb(34, 181, 218);
+  text-align: left;
+  color: #F2F2F3;
+}
+
+.tableHeader {}
+
+.tableList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listElement {
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.done {
+  color: #00CCCC;
+}
