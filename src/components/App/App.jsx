@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import MainPage from '../../pages/main/main';
@@ -20,6 +20,7 @@ import ProfileInfo from '../ProfileInfo/ProfileInfo';
 import Orders from '../Orders/Orders';
 import Order from '../../pages/order/order';
 import Feed from '../../pages/feed/feed';
+import { allOrders, userOrders } from '../../data.js'
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
   useEffect(() => { dispatch(getItemsData()) }, [dispatch])
-  useEffect(() => { dispatch(getUserData()) }, []);
 
   return (
     <div className={styles.App}>
@@ -37,17 +37,16 @@ function App() {
         <Route path="/login" element={<ProtectedRouteElement element={<Login />} />} />
         <Route path="/profile" element={<ProtectedRouteElement isPrivate element={<Profile />} />}>
           <Route path="" element={<ProfileInfo />} />
-          <Route path="orders" element={<Orders />} />
+          <Route path="orders" element={<Orders data={userOrders.orders} path={'/profile/orders'} />} />
         </Route>
-        <Route path="/profile/orders/id" element={<ProtectedRouteElement isPrivate element={<Order />} />} />
+        <Route path="/profile/orders/:id" element={<ProtectedRouteElement isPrivate element={<Order />} />} />
         <Route path="/register" element={<ProtectedRouteElement element={<Register />} />} />
         <Route path="/reset-password" element={<ProtectedRouteElement element={<ResetPassword />} />} />
         <Route path="/forgot-password" element={<ProtectedRouteElement element={<ForgotPassword />} />} />
         <Route path="/ingredients/:id" element={<Ingredient />} />
-        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed" element={<Feed><Orders data={allOrders.orders} path={"/feed"} /></Feed>} />
+        <Route path="/feed/:id" element={<Order />} />
         <Route path="/*" element={<Page404 />} />
-        {/* <Route path="/feed" element={} />
-        <Route path="/feed/:id" element={} /> */}
       </Routes>
       {background && <Routes> <Route path="/ingredients/:id" element={<Modal handleClose={() => { navigate(-1) }}> <IngredientDetails /></Modal>} /> </Routes>}
     </div>

@@ -3,12 +3,14 @@ import styles from './feed.module.css'
 import Orders from '../../components/Orders/Orders';
 import OrderCard from '../../components/Orders/OrderCard/OrderCard';
 
-function Feed() {
+function Feed({ data, children }) {
+  // console.log(data)
+
   return (
     <div className={`${styles.page}`}>
       <h2 className={`${styles.block} text text_type_main-large mt-10 mb-5`}>Лента заказов</h2>
       <div className={`${styles.block}`}>
-        <Orders />
+        {children}
         <div className={`${styles.ordersTemplate}`}>
           <div className={`${styles.ordersStatus}`}>
             <div className={`${styles.table}`}>

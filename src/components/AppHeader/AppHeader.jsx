@@ -14,8 +14,8 @@ function AppHeader() {
           <MenuSection text="Конструктор" link={'/'} active={location.pathname === "/" ? true : false} >
             <BurgerIcon type={location.pathname === "/" ? 'primary' : 'secondary'} />
           </MenuSection>
-          <MenuSection text="Лента заказов" link={'/orders'} active={location.pathname === "/orders" ? true : false}>
-            <ListIcon type={location.pathname === "/orders" ? 'primary' : 'secondary'} />
+          <MenuSection text="Лента заказов" link={'/feed'} active={location.pathname === "/feed" ? true : false}>
+            <ListIcon type={location.pathname === "/feed" ? 'primary' : 'secondary'} />
           </MenuSection>
         </div>
         <div className={styles.appHeaderLogo}><Logo /></div>

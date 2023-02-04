@@ -1,7 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styles from './OrderIngredient.module.css'
 
-function OrderIngredient({ intersection }) {
+function OrderIngredient({ intersection, id, counter }) {
+
+  const allIngredients = useSelector((store) => store.ingredients.items);
+  const ingredientData = allIngredients.filter(item => item._id === id)[0]
+
 
   let className;
   switch (intersection) {
@@ -17,7 +22,11 @@ function OrderIngredient({ intersection }) {
 
   return (
     <div className={`${styles.frame} ${className}`}>
-      <div className={styles.img}></div>
+      <img className={`${styles.img} `} src={ingredientData ? ingredientData.image : null} ></img>
+      {counter >= 2
+        ? (<div className={`${styles.counter} text text_type_main-default`}>+{counter}</div>)
+        : null
+      }
     </div>
   );
 }

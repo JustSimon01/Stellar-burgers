@@ -34,7 +34,7 @@ function Profile() {
         <Link name="exit" className={`${styles.link} ${current === 'exit' ? styles.active : null} text text_type_main-medium`} onClick={logOut}>Выход</Link>
         <p className={`${styles.text} text text_type_main-default mt-8`}>В&nbsp;этом разделе вы&nbsp;можете изменить свои персональные данные.</p>
       </div>
-      <Outlet />
+      <Outlet className="mt-30" />
 
       {/* <form onSubmit={submitChanges} className={styles.form}>
         <Input id='form1' placeholder="Имя" value={userInfo.name} name={'name'} onChange={onChange} icon="EditIcon" disabled={disabled} onIconClick={() => setDisabled(false)} />

@@ -1,5 +1,8 @@
 .orderCard {
   background: #1C1C21;
+  list-style: none;
+  text-decoration: none;
+  color: #F2F2F3;
   border-radius: 40px;
   max-width: 844px;
   height: 246px;
@@ -38,6 +41,14 @@
   justify-self: start;
 }
 
+.complete {
+  color: #00CCCC;
+}
+
+.defaultStatus {
+  color: #F2F2F3;
+}
+
 .ingredients {
   margin: 0;
   grid-area: ingredients;
@@ -51,8 +62,4 @@
   margin: 0;
   grid-area: total;
   margin: auto 0 auto auto;
-}
-
-.complete {
-  color: #00CCCC;
 }
