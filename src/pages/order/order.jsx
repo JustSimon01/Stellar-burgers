@@ -1,37 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './order.module.css'
 import OrderIngredient from '../../components/Orders/OrderIngredient/OrderIngredient';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import TotalPrice from '../../components/TotalPrice/TotalPrice';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { WS_CONNECTION_CLOSED } from '../../services/actions/ws-actions';
+import OrderInfo from '../../components/OrderInfo/OrderInfo';
+import PropTypes from 'prop-types';
 
-function Order() {
+function Order({ type }) {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const allOrdersData = useSelector((store) => store.wsOrders.orders);
+
+  useEffect(() => {
+    if (allOrdersData === null) {
+      dispatch({ type: type });
+      console.log('dispatch')
+      return () => dispatch({ type: WS_CONNECTION_CLOSED });
+    }
+  }, []);
+
 
   return (
-    <div className={`${styles.orderBlock}`}>
-      <p className={`${styles.orderNumber} text text_type_digits-default mb-10`}>#034535</p>
-      <h3 className={`${styles.orderName} text text_type_main-medium mb-3`}>Death Star Starship Main бургер</h3>
-      <p className={`${styles.orderDone} text text_type_main-default mb-15`}>Выполнен</p>
-      <p className={`${styles.orderConsist} text text_type_main-medium mb-6`}>Состав:</p>
-      <ul className={`${styles.blockWithScroll} mb-10`}>
-
-        <li className={`${styles.ingredientCard}`}>
-          <div className={`${styles.ingredient}`}>
-            <OrderIngredient />
-            <p className={`text text_type_main-default ml-4`}>Флюоресцентная булка R2-D3</p>
-          </div>
-          <div className={`${styles.ingredientPriceBlock}`}>
-            <p className={`text text_type_digits-default mr-2`}>1 x 300</p>
-            <CurrencyIcon />
-          </div>
-        </li>
-
-      </ul>
-      <div className={`${styles.bottomBlock}`}>
-        <p className={`${styles.orderDate} text text_type_main-default`}>Сегодня, 16:20 i-GMT+3</p>
-        <TotalPrice totalPrice={0} />
-      </div>
-    </div >
+    <>
+      {allOrdersData
+        ? <OrderInfo ></OrderInfo>
+        : <p>Загрузка данных...</p>}
+    </>
   );
+}
+
+Order.propTypes = {
+  type: PropTypes.string
 }
 
 export default Order;

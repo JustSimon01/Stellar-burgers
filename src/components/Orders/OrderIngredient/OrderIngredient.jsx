@@ -14,7 +14,7 @@ function OrderIngredient({ intersection, id, counter }) {
       className = styles.intersection
       break;
     case false:
-      className = ""
+      className = null
       break;
     default:
       break;

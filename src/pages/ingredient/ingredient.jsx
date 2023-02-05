@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './ingredient.module.css'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,9 +10,11 @@ function Ingredient() {
   const itemsLoaded = useSelector((store) => store.ingredients.items);
   const ingredientInfo = itemsLoaded.find(item => item._id === id);
 
-  if (itemsLoaded && !ingredientInfo) {
-    return (navigate('/*'))
-  }
+  useEffect(() => {
+    if (itemsLoaded && !ingredientInfo) {
+      return (navigate('/*'))
+    }
+  }, [])
 
   return (
     <>

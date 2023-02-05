@@ -33,6 +33,10 @@
   margin: 0;
   grid-area: name;
   justify-self: start;
+  max-width: 536px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .status {
@@ -45,7 +49,7 @@
   color: #00CCCC;
 }
 
-.defaultStatus {
+.default {
   color: #F2F2F3;
 }
 
@@ -55,7 +59,7 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  align-items: center
+  align-items: center;
 }
 
 .total {

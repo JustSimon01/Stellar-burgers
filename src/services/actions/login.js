@@ -108,7 +108,6 @@ export function refreshToken() {
           type: REFRESH_ACCESS_TOKEN_SUCCESS,
           payload: res
         });
-
         setCookie('accessToken', res.accessToken.split('Bearer ')[1]);
         setCookie('refreshToken', res.refreshToken);
         dispatch(getUserData());

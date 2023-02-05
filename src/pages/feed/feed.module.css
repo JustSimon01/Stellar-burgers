@@ -5,8 +5,6 @@
   text-align: left;
 }
 
-.header {}
-
 .block {
   display: flex;
   flex-direction: row;
@@ -16,7 +14,6 @@
 .ordersTemplate {
   max-width: 580px;
   width: 100%;
-  border: 1px dashed whitesmoke;
 }
 
 .ordersStatus {
@@ -25,27 +22,6 @@
   justify-content: space-between;
 }
 
-.table {
-  height: 206px;
-  width: 272px;
-  border: 1px dashed rgb(34, 181, 218);
-  text-align: left;
-  color: #F2F2F3;
-}
-
-.tableHeader {}
-
-.tableList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.listElement {
-  margin: 0 0 8px 0;
-  padding: 0;
-}
-
-.done {
-  color: #00CCCC;
+.statsData {
+  text-shadow: #3333ff80 0 0 20px;
 }

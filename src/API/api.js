@@ -18,7 +18,10 @@ export function getAllIngredients() {
 export function postOrderInfo(array) {
   return fetch(`${config.baseURL}/orders`, {
     method: 'POST',
-    headers: config.headers,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: 'Bearer ' + getCookie('accessToken')
+    },
     body: JSON.stringify({
       ingredients: array
     })

@@ -19,7 +19,6 @@ export function setCookie(name, value, props) {
     }
   }
   document.cookie = updatedCookie;
-  console.log(updatedCookie)
 }
 
 export function getCookie(name) {
