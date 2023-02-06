@@ -6,13 +6,12 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { WS_CONNECTION_CLOSED } from '../../services/actions/ws-actions';
 
-function OrderInfo({ modal }) {
+function OrderInfo({ modal, data }) {
   const navigate = useNavigate();
   const { id } = useParams();
-  const ordersData = useSelector((store) => store.wsOrders.orders);
-  const currentOrderData = ordersData.find(item => item._id === id)
+
+  const currentOrderData = data.find(item => item._id === id);
   const allIngredients = useSelector((store) => store.ingredients.items);
   const orderingredients = currentOrderData?.ingredients.map((item) => allIngredients.find((data) => data._id === item));
   const totalPrice = orderingredients?.reduce((previous, current) => previous + current.price, 0);
@@ -25,7 +24,7 @@ function OrderInfo({ modal }) {
   };
 
   useEffect(() => {
-    if (ordersData && !currentOrderData) {
+    if (data && !currentOrderData) {
       return (navigate('/*'))
     }
   }, [])

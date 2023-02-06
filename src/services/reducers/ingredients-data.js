@@ -2,7 +2,7 @@ import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILE
 
 // список всех полученных ингредиентов,
 const initialState = {
-  items: [],
+  items: null,
   itemsRequest: false,
   itemsFailed: false,
   itemsLoaded: false,

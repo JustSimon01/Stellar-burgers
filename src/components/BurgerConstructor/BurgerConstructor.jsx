@@ -12,8 +12,10 @@ import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
 import { sentOrderInformation } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from 'react-router-dom';
 
 function BurgerConstructor() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((store) => store.userInfo);
   const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
@@ -33,10 +35,15 @@ function BurgerConstructor() {
   );
 
   function orderConfirmation() {
-    const orderArray = [...constructorIngredients, ...constructorBuns]
-    dispatch(addOrderitems(orderArray));
-    dispatch(sentOrderInformation(orderArray));
-    setModalActive(true);
+    if (!isAuthenticated) {
+      return (navigate('/login'))
+    }
+    if (isAuthenticated) {
+      const orderArray = [...constructorIngredients, ...constructorBuns]
+      dispatch(addOrderitems(orderArray));
+      dispatch(sentOrderInformation(orderArray));
+      setModalActive(true);
+    }
   }
 
   function closeModal() {
@@ -61,7 +68,7 @@ function BurgerConstructor() {
   useEffect(() => {
     if (constructorBuns.length === 0 || constructorIngredients.length === 0) {
       setbuttonState(true)
-    } else if ((constructorBuns.length > 0 && constructorIngredients.length > 0) && isAuthenticated) {
+    } else if ((constructorBuns.length > 0 && constructorIngredients.length > 0)) {
       setbuttonState(false)
     }
   }, [constructorBuns, constructorIngredients])

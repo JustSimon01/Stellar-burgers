@@ -1,55 +1,55 @@
 import {
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_CLOSED,
-  WS_GET_ORDERS,
-} from '../actions/ws-actions';
+  WS_AUTH_CONNECTION_SUCCESS,
+  WS_AUTH_CONNECTION_ERROR,
+  WS_AUTH_CONNECTION_CLOSED,
+  WS_GET_AUTH_ORDERS
+} from '../actions/ws-auth-actions';
 
 const initialState = {
-  wsConnected: false,
-  wsError: undefined,
+  wsAuthConnected: false,
+  wsAuthError: undefined,
   orders: null,
   total: 0,
   totalToday: 0
 }
 
 // Создадим редьюсер для WebSocket
-export const wsReducer = (state = initialState, action) => {
+export const wsAuthReducer = (state = initialState, action) => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true
-    case WS_CONNECTION_SUCCESS:
+    case WS_AUTH_CONNECTION_SUCCESS:
       return {
         ...state,
-        wsError: undefined,
-        wsConnected: true
+        wsAuthError: undefined,
+        wsAuthConnected: true
       };
 
     // Опишем обработку экшена с типом WS_CONNECTION_ERROR
     // Установим флаг wsConnected в состояние false и передадим ошибку из action.payload
-    case WS_CONNECTION_ERROR:
+    case WS_AUTH_CONNECTION_ERROR:
       return {
         ...state,
-        wsError: action.payload,
-        wsConnected: false
+        wsAuthError: action.payload,
+        wsAuthConnected: false
       };
 
     // Опишем обработку экшена с типом WS_CONNECTION_CLOSED, когда соединение закрывается
     // Установим флаг wsConnected в состояние false
-    case WS_CONNECTION_CLOSED:
+    case WS_AUTH_CONNECTION_CLOSED:
       return {
         ...state,
-        wsError: undefined,
-        wsConnected: false,
+        wsAuthError: undefined,
+        wsAuthConnected: false,
         orders: null,
       };
 
-    // Опишем обработку экшена с типом WS_GET_ORDERS
+    // Опишем обработку экшена с типом WS_GET_AUTH_ORDERS
     // Обработка происходит, когда с сервера возвращаются данные
-    case WS_GET_ORDERS:
+    case WS_GET_AUTH_ORDERS:
       return {
         ...state,
-        wsError: undefined,
+        wsAuthError: undefined,
         orders: action.payload.orders,
         total: action.payload.total,
         totalToday: action.payload.totalToday

@@ -48,6 +48,7 @@ export function userLogout(goToPage) {
     });
     logout().then(res => {
       if (res && res.success) {
+        console.log('sucsess')
         deleteCookie('accessToken');
         deleteCookie('refreshToken');
         goToPage();

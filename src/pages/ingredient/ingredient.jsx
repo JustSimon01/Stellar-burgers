@@ -14,7 +14,7 @@ function Ingredient() {
     if (itemsLoaded && !ingredientInfo) {
       return (navigate('/*'))
     }
-  }, [])
+  }, [itemsLoaded])
 
   return (
     <>
