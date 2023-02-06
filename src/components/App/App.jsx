@@ -19,7 +19,7 @@ import ProfileInfo from '../ProfileInfo/ProfileInfo';
 import Order from '../../pages/order/order';
 import Feed from '../../pages/feed/feed';
 import OrderInfo from '../OrderInfo/OrderInfo';
-import ProfileOrders from '../../pages/profile-order/profile-orders';
+import ProfileOrders from '../../pages/profile-orders/profile-orders';
 import { WS_AUTH_CONNECTION_CLOSED, WS_AUTH_CONNECTION_START } from '../../services/actions/ws-auth-actions';
 import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from '../../services/actions/ws-actions';
 
