@@ -4,7 +4,7 @@ import styles from './OrderInfo.module.css'
 import OrderIngredient from '../Orders/OrderIngredient/OrderIngredient';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import TotalPrice from '../TotalPrice/TotalPrice';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function OrderInfo({ modal, data }) {

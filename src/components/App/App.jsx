@@ -57,9 +57,9 @@ function App() {
           <Route path="/*" element={<Page404 />} />
         </Routes>
       }
-      {background && <Routes> <Route path="/ingredients/:id" element={<Modal handleClose={() => { navigate(-1) }}><IngredientDetails /></Modal>} /> </Routes>}
-      {background && <Routes> <Route path="/feed/:id" element={<Modal handleClose={() => { navigate(-1) }}><OrderInfo modal data={wsOrdersData} /></Modal>} /></Routes>}
-      {background && <Routes> <Route path="/profile/orders/:id" element={<Modal handleClose={() => { navigate(-1) }}><OrderInfo modal data={wsAuthOrdersData} /></Modal>} /></Routes>}
+      {background && itemsLoaded && <Routes> <Route path="/ingredients/:id" element={<Modal handleClose={() => { navigate(-1) }}><IngredientDetails data={itemsLoaded} /></Modal>} /> </Routes>}
+      {background && wsOrdersData && <Routes> <Route path="/feed/:id" element={<Modal handleClose={() => { navigate(-1) }}><OrderInfo modal data={wsOrdersData} /></Modal>} /> </Routes>}
+      {background && wsAuthOrdersData && <Routes> <Route path="/profile/orders/:id" element={<Modal handleClose={() => { navigate(-1) }}><OrderInfo modal data={wsAuthOrdersData} /></Modal>} /> </Routes>}
     </div>
   );
 }

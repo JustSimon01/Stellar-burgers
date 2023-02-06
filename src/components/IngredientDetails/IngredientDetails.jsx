@@ -3,10 +3,9 @@ import styles from './IngredientDetails.module.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-function IngredientDetails() {
+function IngredientDetails({ data }) {
   const { id } = useParams();
-  const itemsLoaded = useSelector((store) => store.ingredients.items);
-  const ingredientInfo = itemsLoaded.find(item => item._id === id);
+  const ingredientInfo = data.find(item => item._id === id);
 
   return (
     <>

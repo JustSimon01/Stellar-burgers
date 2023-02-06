@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import OrderInfo from '../../components/OrderInfo/OrderInfo';
 import PropTypes from 'prop-types';
 
 function Order({ start, close, data }) {
   const { id } = useParams();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
