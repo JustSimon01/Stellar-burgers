@@ -22,7 +22,7 @@ export function sentVerificationEmail(email, goToPage) {
           })
         }
       })
-      .then(goToPage())
+      .then(goToPage)
       .catch(e => {
         dispatch({
           type: VERIFICATION_EMAIL_FAILED,

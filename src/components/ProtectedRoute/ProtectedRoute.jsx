@@ -1,25 +1,23 @@
-import React, { useEffect } from 'react';
-import { useSelector } from "react-redux";
+import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getUserData } from '../../services/actions/login';
+import { getCookie } from '../../utils/cooke';
 
-function ProtectedRouteElement({ isPrivate, element }) {
-  const { isAuthenticated } = useSelector((store) => store.userInfo);
+export default function ProtectedRoute({ children, anonymous = false }) {
+  const isLoggedIn = getCookie("accessToken");
   const location = useLocation();
-  const dispatch = useDispatch();
-  useEffect(() => { dispatch(getUserData()) }, []);
 
-  if (!isPrivate && isAuthenticated) {
-    return <Navigate to={location.state ? location.state.from.pathname : "/"} replace state={{ from: location }} />;
+  const from = location.state?.from.pathname || '/';
+  // Если разрешен неавторизованный доступ, а пользователь авторизован...
+  if (anonymous && isLoggedIn) {
+    // ...то отправляем его на предыдущую страницу
+    return <Navigate to={from} />;
   }
-
-  if (isPrivate && !isAuthenticated) {
+  // Если требуется авторизация, а пользователь не авторизован...
+  if (!anonymous && !isLoggedIn) {
+    // ...то отправляем его на страницу логин
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
-
-  return element;
-
+  // Если все ок, то рендерим внутреннее содержимое
+  return children;
 }
 
-export default ProtectedRouteElement;

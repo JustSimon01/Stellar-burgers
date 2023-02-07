@@ -34,8 +34,8 @@ function ProfileInfo() {
 
   return (
     <form onSubmit={submitChanges} className={`${styles.form} mt-30`}>
-      <Input id='form1' placeholder="Имя" value={userInfo.name} name={'name'} onChange={onChange} icon="EditIcon" disabled={disabled} onIconClick={() => setDisabled(false)} />
-      <EmailInput placeholder="Логин" value={userInfo.email} name={'email'} onChange={onChange} isIcon={true} />
+      <Input id='form1' placeholder="Имя" value={name} name={'name'} onChange={onChange} icon="EditIcon" disabled={disabled} onIconClick={() => setDisabled(false)} />
+      <EmailInput placeholder="Логин" value={email} name={'email'} onChange={onChange} isIcon={true} />
       <PasswordInput placeholder="Пароль" value={userInfo.password} name={'password'} onChange={onChange} icon="EditIcon" />
       <div className={styles.buttons}>
         <Button htmlType="button" type="secondary" size="medium" onClick={canсelChanges}>Отменить</Button>

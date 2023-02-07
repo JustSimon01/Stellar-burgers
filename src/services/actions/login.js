@@ -48,7 +48,6 @@ export function userLogout(goToPage) {
     });
     logout().then(res => {
       if (res && res.success) {
-        console.log('sucsess')
         deleteCookie('accessToken');
         deleteCookie('refreshToken');
         goToPage();
@@ -78,26 +77,6 @@ export function getUserData() {
   }
 }
 
-export function updateUserData(data) {
-  return function (dispatch) {
-    dispatch({
-      type: USER_DATA_UPDATE_REQUEST
-    });
-    updateUser(data).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: USER_DATA_UPDATE_SUCCESS,
-          payload: res
-        });
-      }
-    }).catch(e => {
-      dispatch({
-        type: USER_DATA_UPDATE_FAILED,
-      });
-    })
-  }
-}
-
 export function refreshToken() {
   return function (dispatch) {
     dispatch({
@@ -120,3 +99,24 @@ export function refreshToken() {
     })
   }
 }
+
+export function updateUserData(data) {
+  return function (dispatch) {
+    dispatch({
+      type: USER_DATA_UPDATE_REQUEST
+    });
+    updateUser(data).then(res => {
+      if (res && res.success) {
+        dispatch({
+          type: USER_DATA_UPDATE_SUCCESS,
+          payload: res
+        });
+      }
+    }).catch(e => {
+      dispatch({
+        type: USER_DATA_UPDATE_FAILED,
+      });
+    })
+  }
+}
+

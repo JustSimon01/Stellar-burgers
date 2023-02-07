@@ -6,11 +6,10 @@ function Orders({ path, ordersData, reverse }) {
   return (
     <ul className={`${styles.blockWithScroll} mt-10`}>
       {reverse
-        ? ordersData.orders?.map(item => <OrderCard data={item} path={path} key={crypto.randomUUID()} />).reverse()
-        : ordersData.orders?.map(item => <OrderCard data={item} path={path} key={crypto.randomUUID()} />)
+        ? ordersData.orders?.map(item => <OrderCard data={item} path={path} key={item._id} />).reverse()
+        : ordersData.orders?.map(item => <OrderCard data={item} path={path} key={item._id} />)
       }
     </ul>
-
   );
 }
 
