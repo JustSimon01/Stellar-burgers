@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import styles from './feed.module.css'
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../services/actions/ws-actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../types/hooks';
 import Orders from '../../components/Orders/Orders';
 import InfoTable from '../../components/InfoTable/InfoTable';
 import { FC } from 'react';
 
 const Feed: FC<{ path:string }> = ({ path }) => {
   const dispatch = useDispatch();
-  const wsData = useSelector((store: any) => store.wsOrders);
-  const ordersData = useSelector((store: any) => store.wsOrders.orders);
+  const wsData = useSelector((store) => store.wsOrders);
+  const ordersData = useSelector((store) => store.wsOrders.orders);
 
   useEffect(() => {
     dispatch({ type: WS_CONNECTION_START });
@@ -20,7 +20,7 @@ const Feed: FC<{ path:string }> = ({ path }) => {
     <div className={`${styles.page}`}>
       <h2 className={`${styles.block} text text_type_main-large mt-10 mb-5`}>Лента заказов</h2>
       <div className={`${styles.block}`}>
-        <Orders ordersData={wsData.orders} path={path} />
+        <Orders ordersData={wsData.orders!} path={path} />
         <div className={`${styles.ordersTemplate}`}>
           <div className={`${styles.ordersStatus}`}>
             {ordersData

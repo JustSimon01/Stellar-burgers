@@ -101,7 +101,7 @@ export function getUser() {
 
 //обновление данных пользователя через профиль
 
-export function updateUser(data: {email: string, user: string}) {
+export function updateUser(data: {email: string, name: string}) {
   return fetch(`${config.baseURL}/auth/user`, {
     method: 'PATCH',
     headers: {

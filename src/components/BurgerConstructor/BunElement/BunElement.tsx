@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../types/hooks';
 import emptyBurger from '../../../images/empty-burger.png';
 import { FC } from 'react';
 
@@ -11,7 +11,7 @@ type TBunElement = {
 
 const BunElement: FC<TBunElement> = ({ type, isLocked }) => {
 
-  const buns = useSelector((store: any) => store.constructorIngredients.buns);
+  const buns = useSelector((store) => store.constructorIngredients.buns);
 
   return (
     <>{buns.length === 0

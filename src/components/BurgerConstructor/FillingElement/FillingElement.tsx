@@ -1,18 +1,17 @@
 import React, { useRef } from 'react';
 import styles from './FillingElement.module.css';
-import { ingredientPropTypes } from '../../../utils/PropTypes';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd/dist/hooks';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../types/hooks';
 import { moveIngredientInConstructor, deleteIngredient } from '../../../services/actions/ingredients-constructor';
 import { FC } from 'react';
 import { TIngredient } from '../../../types/types';
 
 type TFillingElement = {
   data: TIngredient,
-  index: string,
-  id: string | undefined
+  index: number,
+  id: string
 }
 
 const FillingElement: FC<TFillingElement> = ({ data, index, id }) => {
@@ -44,7 +43,7 @@ const FillingElement: FC<TFillingElement> = ({ data, index, id }) => {
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
-
+ 
       dispatch(moveIngredientInConstructor({ dragIndex, hoverIndex }))
 
       item.index = hoverIndex;
@@ -72,7 +71,7 @@ const FillingElement: FC<TFillingElement> = ({ data, index, id }) => {
         text={data.name}
         price={data.price}
         thumbnail={data.image_mobile}
-        handleClose={() => dispatch(deleteIngredient(index))}
+        handleClose={() => dispatch(deleteIngredient(id))}
       />
     </li>
   )

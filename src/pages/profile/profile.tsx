@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './profile.module.css'
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../types/hooks';
 import { userLogout } from '../../services/actions/login';
 import { useNavigate, Outlet, useLocation, NavLink } from 'react-router-dom';
 import { FC } from 'react';
@@ -9,24 +9,11 @@ import { FC } from 'react';
 const Profile: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  // const [current, setCurrent] = useState('profile')
-
-  // useEffect(() => {
-  //   if (location.pathname === '/profile') {
-  //     setCurrent('profile');
-  //   }
-  //   if (location.pathname === '/profile/orders') {
-  //     setCurrent("orders");
-  //   }
-  // }, [location]);
-
 
   const logOut = () => {
     // setCurrent(e.target.name);
     dispatch(userLogout(() => navigate('/login')));
   }
-
 
   return (
     <div className={styles.profilePage}>

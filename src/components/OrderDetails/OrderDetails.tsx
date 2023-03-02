@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './OrderDetails.module.css'
 import confirmImg from '../../images/confirm.svg';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../types/hooks';
 import { FC } from 'react';
 
 const OrderDetails: FC = () => {
   const zeroLength = 6;
-  const orderInfo = useSelector((store:any) => store.orderInformation.orderNumber); //данные заказа
+  const orderInfo = useSelector((store) => store.orderInformation.orderNumber); //данные заказа
   const orderNumber = String(orderInfo).padStart(zeroLength, '0');
 
   return (

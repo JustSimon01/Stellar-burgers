@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 type TProtectedRoute = {
   children: JSX.Element,
-  anonymous: boolean
+  anonymous?: boolean
 }
 
 const ProtectedRoute: FC<TProtectedRoute> = ({ children, anonymous = false }) => {

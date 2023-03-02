@@ -1,7 +1,17 @@
 import { GET_ORDER_NUMBER_REQUEST, GET_ORDER_NUMBER_SUCCESS, GET_ORDER_NUMBER_FAILED, ADD_ORDER_ITEMS, DELETE_ORDER_INFO } from '../actions/order'
+import { TOrderActions } from '../actions/order';
+
 
 // объект созданного заказа.
-const initialState = {
+type TinitialState = {
+  orderNumber: number | null,
+  orderNumberRequest: boolean,
+  orderNumberFailed: boolean,
+  isLoaded: boolean,
+  orderItems: string[] | [],
+};
+
+const initialState: TinitialState = {
   orderNumber: null,
   orderNumberRequest: false,
   orderNumberFailed: false,
@@ -9,7 +19,7 @@ const initialState = {
   orderItems: [],
 };
 
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action: TOrderActions) => {
   switch (action.type) {
     case GET_ORDER_NUMBER_REQUEST:
       return { ...state, orderNumberRequest: true };

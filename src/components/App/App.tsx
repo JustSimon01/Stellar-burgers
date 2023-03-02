@@ -13,7 +13,7 @@ import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import Ingredient from '../../pages/ingredient/ingredient';
 //import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import { getItemsData } from '../../services/actions/ingresients-data';
-import { useDispatch, useSelector } from 'react-redux';
+import {useSelector, useDispatch } from '../../types/hooks';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
 import OrderFullScreen from '../../pages/order/order';
@@ -30,10 +30,10 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
-  const userData = useSelector((store: any) => store.userInfo);
-  const itemsLoaded = useSelector((store: any) => store.ingredients.items);
-  const wsOrdersData = useSelector((store: any) => store.wsOrders.orders);
-  const wsAuthOrdersData = useSelector((store: any) => store.wsAuthOrders.orders);
+  const userData = useSelector((store) => store.userInfo);
+  const itemsLoaded = useSelector((store) => store.ingredients.items);
+  const wsOrdersData = useSelector((store) => store.wsOrders.orders);
+  const wsAuthOrdersData = useSelector((store) => store.wsAuthOrders.orders);
 
   useEffect(() => {
     dispatch(getItemsData());
@@ -57,14 +57,14 @@ function App() {
             <Route path="orders" element={<ProfileOrders reverse path={'/profile/orders'} />} />
           </Route>
           <Route path="/profile/orders/:id" element={<ProtectedRoute>
-            <OrderFullScreen start={WS_AUTH_CONNECTION_START} close={WS_AUTH_CONNECTION_CLOSED} data={wsAuthOrdersData} /></ProtectedRoute>}
+            <OrderFullScreen start={WS_AUTH_CONNECTION_START} close={WS_AUTH_CONNECTION_CLOSED} data={wsAuthOrdersData!} /></ProtectedRoute>}
           />
           <Route path="/register" element={<ProtectedRoute><Register /></ProtectedRoute>} />
           <Route path="/reset-password" element={<ProtectedRoute anonymous><ResetPassword /></ProtectedRoute>} />
           <Route path="/forgot-password" element={<ProtectedRoute anonymous><ForgotPassword /></ProtectedRoute>} />
           <Route path="/ingredients/:id" element={<Ingredient />} />
           <Route path="/feed" element={<Feed path={'/feed'} />} />
-          <Route path="/feed/:id" element={<OrderFullScreen start={WS_CONNECTION_START} close={WS_CONNECTION_CLOSED} data={wsOrdersData} />} />
+          <Route path="/feed/:id" element={<OrderFullScreen start={WS_CONNECTION_START} close={WS_CONNECTION_CLOSED} data={wsOrdersData!} />} />
           <Route path="/*" element={<Page404 />} />
         </Routes>
       }

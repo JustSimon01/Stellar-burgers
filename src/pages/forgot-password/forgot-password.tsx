@@ -3,13 +3,13 @@ import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-comp
 import styles from './forgot-password.module.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { sentVerificationEmail } from '../../services/actions/reset-password';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../types/hooks';
 import { FC } from 'react';
 
 const ForgotPassword: FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);

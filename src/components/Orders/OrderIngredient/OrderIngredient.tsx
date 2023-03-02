@@ -1,8 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../types/hooks';
 import styles from './OrderIngredient.module.css';
 import { FC } from 'react';
-import { TIngredient } from '../../../types/types';
 
 type TOrderIngredient = {
   intersection: boolean,
@@ -12,8 +11,8 @@ type TOrderIngredient = {
 
 const OrderIngredient: FC<TOrderIngredient> = ({ intersection, id, counter }) => {
 
-  const allIngredients: Array<TIngredient> = useSelector((store: any) => store.ingredients.items);
-  const ingredientData: TIngredient = allIngredients.filter(item => item._id === id)[0]
+  const allIngredients = useSelector((store) => store.ingredients.items);
+  const ingredientData = allIngredients!.filter(item => item._id === id)[0]
 
 
   let className;

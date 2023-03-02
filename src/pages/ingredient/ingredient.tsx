@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../types/hooks';
 import styles from './ingredient.module.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { FC } from 'react';
@@ -8,8 +8,8 @@ import { TIngredient } from '../../types/types';
 const Ingredient: FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const itemsLoaded:Array<TIngredient> = useSelector((store:any) => store.ingredients.items);
-  const ingredientInfo = itemsLoaded.find(item => item._id === id);
+  const itemsLoaded = useSelector((store) => store.ingredients.items);
+  const ingredientInfo = itemsLoaded!.find(item => item._id === id);
 
   useEffect(() => {
     if (itemsLoaded && !ingredientInfo) {

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import styles from './login.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../types/hooks';
 import { loginUser } from '../../services/actions/login';
 import { FC } from 'react';
 
 const Login: FC = () => {
-  const userData = useSelector((store: any) => store.userInfo); //подгрузка данных из стора
+  const userData = useSelector((store) => store.userInfo); //подгрузка данных из стора
   const dispatch = useDispatch();
 
   const [loginInfo, setLoginInfo] = useState(

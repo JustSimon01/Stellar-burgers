@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../../../utils/PropTypes';
 import styles from './Ingredient.module.css'
 import { addIngredientInfo } from '../../../../services/actions/ingredient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../../types/hooks';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
@@ -14,8 +14,8 @@ const Ingredient: FC<{data: TIngredient, mealType: string}> = ({ data, mealType 
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const constructorIngredients = useSelector((store: any) => store.constructorIngredients.ingredients);
-  const constructorBuns = useSelector((store: any) => store.constructorIngredients.buns);
+  const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients);
+  const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
 
   const count = useMemo(() => {
     const allIngredients = [...constructorIngredients, ...constructorBuns]

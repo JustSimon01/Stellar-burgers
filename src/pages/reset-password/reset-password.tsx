@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './reset-password.module.css'
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../types/hooks';
 import { resetPassword } from '../../services/actions/reset-password';
 import { FC } from 'react';
 
 const ResetPassword: FC = () => {
   const dispatch = useDispatch();
-  const { verificationSent } = useSelector((store: any) => store.resetPassword);
+  const { verificationSent } = useSelector((store) => store.resetPassword);
   const navigate = useNavigate();
   const [newPasswordInfo, setnewPasswordInfo] = useState(
     {

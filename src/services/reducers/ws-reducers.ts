@@ -4,8 +4,18 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_ORDERS,
 } from '../actions/ws-actions';
+import { TWsActions } from '../actions/ws-actions';
+import { TOrder } from '../../types/types';
 
-const initialState = {
+type TinitialState = {
+  wsConnected: boolean,
+  wsError: string | undefined,
+  orders: Array<TOrder> | null,
+  total: number,
+  totalToday: number
+}
+
+const initialState: TinitialState = {
   wsConnected: false,
   wsError: undefined,
   orders: null,
@@ -14,7 +24,7 @@ const initialState = {
 }
 
 // Создадим редьюсер для WebSocket
-export const wsReducer = (state = initialState, action) => {
+export const wsReducer = (state = initialState, action: TWsActions) => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true

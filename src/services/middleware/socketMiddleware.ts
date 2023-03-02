@@ -1,9 +1,20 @@
+import { AppDispatch, RootState } from "../../types";
+import { MiddlewareAPI } from "@reduxjs/toolkit";
+import { Middleware } from "redux";
 import { getCookie } from "../../utils/cooke";
 
-export const socketMiddleware = (wsUrl, wsActions, auth) => {
+type TWsActions = {
+  wsStart: string,
+  onOpen: string,
+  onClose: string,
+  onError: string,
+  getOrders: string
+}
+// не особо понимаю эту типизацию -_-
+export const socketMiddleware: any = (wsUrl: string, wsActions: TWsActions, auth: boolean): Middleware => {
 
-  return store => {
-    let socket = null;
+  return (store: MiddlewareAPI) => {
+    let socket: WebSocket | null = null;
 
     return next => action => {
       const { dispatch } = store;
@@ -22,24 +33,24 @@ export const socketMiddleware = (wsUrl, wsActions, auth) => {
 
       if (socket) {
         // функция, которая вызывается при открытии сокета
-        socket.onopen = event => {
+        socket.onopen = (event: Event) => {
           dispatch({ type: onOpen, payload: event });
         };
 
         // функция, которая вызывается при ошибке соединения
-        socket.onerror = event => {
+        socket.onerror = (event: Event) => {
           dispatch({ type: onError, payload: event });
         };
 
         // функция, которая вызывается при получении события от сервера
-        socket.onmessage = event => {
+        socket.onmessage = (event: MessageEvent<any>) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
           const { success, ...restParsedData } = parsedData;
           dispatch({ type: getOrders, payload: restParsedData });
         };
         // функция, которая вызывается при закрытии соединения
-        socket.onclose = event => {
+        socket.onclose = (event: CloseEvent) => {
           dispatch({ type: onClose, payload: event });
         };
       }

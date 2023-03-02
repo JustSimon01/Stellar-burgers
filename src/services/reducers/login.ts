@@ -14,7 +14,28 @@ import {
   USER_DATA_UPDATE_FAILED
 } from '../actions/login';
 
-const initialState = {
+import { TLoginActions } from '../actions/login';
+
+type TInitialState = {
+  loginRequest: boolean,
+  loginRequestFailed: boolean,
+  userDataLoaded: boolean,
+  userDataRequest: boolean,
+  userDataRequestFailed: boolean,
+  userDataUpdateRequest: boolean,
+  userDataUpdateFailed: boolean,
+  accessTokenRequest: boolean,
+  accessTokenRequestFailed: boolean,
+  isAuthenticated: boolean,
+  user: {
+    email: string,
+    name: string
+  },
+  accessToken: string,
+  refreshToken: string
+}
+
+const initialState: TInitialState = {
   loginRequest: false,
   loginRequestFailed: false,
   userDataLoaded: false,
@@ -33,7 +54,7 @@ const initialState = {
   refreshToken: ""
 };
 
-export const userInfoReducer = (state = initialState, action) => {
+export const userInfoReducer = (state = initialState, action: TLoginActions) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
       return { ...state, loginRequest: true };

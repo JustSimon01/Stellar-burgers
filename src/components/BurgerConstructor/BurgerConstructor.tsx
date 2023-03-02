@@ -6,7 +6,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import FillingElement from './FillingElement/FillingElement';
 import BunElement from './BunElement/BunElement';
 import TotalPrice from '../TotalPrice/TotalPrice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../types/hooks';
 import { addIngredientInConstructor, addBunsInConstructor, deleteAllIngredients } from '../../services/actions/ingredients-constructor';
 import { addOrderitems, deleteOrderInfo } from '../../services/actions/order';
 import { sentOrderInformation } from '../../services/actions/order';
@@ -19,10 +19,10 @@ import { TIngredient } from '../../types/types';
 const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((store: any) => store.userInfo);
-  const constructorIngredients = useSelector((store: any) => store.constructorIngredients.ingredients); //данные в конструкторе
-  const constructorBuns = useSelector((store: any) => store.constructorIngredients.buns);
-  const orderIsLoaded = useSelector((store: any) => store.orderInformation.isLoaded);
+  const { isAuthenticated } = useSelector((store) => store.userInfo);
+  const constructorIngredients = useSelector((store) => store.constructorIngredients.ingredients); //данные в конструкторе
+  const constructorBuns = useSelector((store) => store.constructorIngredients.buns);
+  const orderIsLoaded = useSelector((store) => store.orderInformation.isLoaded);
 
   const [modalActive, setModalActive] = useState(false);
 
@@ -41,7 +41,7 @@ const BurgerConstructor: FC = () => {
       return (navigate('/login'))
     }
     if (isAuthenticated) {
-      const orderArray = [...constructorIngredients, ...constructorBuns]
+      const orderArray = [...constructorIngredients, ...constructorBuns].map(item => item._id);
       dispatch(addOrderitems(orderArray));
       dispatch(sentOrderInformation(orderArray));
       setModalActive(true);
@@ -85,8 +85,8 @@ const BurgerConstructor: FC = () => {
         <ul className={`${styles.filling} mt-4 mb-4`}>
           {constructorIngredients.length === 0
             ? <div className={`${styles.addIngredient} text text_type_main-large pb-8`}>Добавь Ингредиент!</div>
-            : constructorIngredients.map((item: TIngredient, index: string) => {
-              return <FillingElement data={item} key={item.id} index={index} id={item.id} />
+            : constructorIngredients.map((item, index) => {
+              return <FillingElement data={item} key={item.id} index={index} id={item.id!} />
             })
           }
         </ul>

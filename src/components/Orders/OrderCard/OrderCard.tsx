@@ -1,6 +1,6 @@
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useState, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../types/hooks';
 import { Link, useLocation } from 'react-router-dom';
 import { addCurrentOrderInfo } from '../../../services/actions/current-order';
 import TotalPrice from '../../TotalPrice/TotalPrice';
@@ -17,7 +17,7 @@ type TOrderCard = {
 const OrderCard: FC<TOrderCard> = ({ data, path }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const allIngredients: Array<TIngredient> = useSelector((store: any) => store.ingredients.items);
+  const allIngredients = useSelector((store) => store.ingredients.items);
   const uniqueIngredients = data.ingredients.filter((element, index) => {
     return data.ingredients.indexOf(element) === index;
   }).reverse();
@@ -40,9 +40,9 @@ const OrderCard: FC<TOrderCard> = ({ data, path }) => {
     });
 
   useMemo(() => {
-    if (allIngredients.length !== 0) {
+    if (allIngredients!.length !== 0) {
       //в данные на сервере могут попасть null, убираем все несоответствия
-      const ingredients = data.ingredients.map((item) => allIngredients.find((data) => data._id === item)).filter(Boolean);
+      const ingredients = data.ingredients.map((item) => allIngredients!.find((data) => data._id === item)).filter(Boolean);
       const totalPrice = ingredients?.reduce((previous, current) => previous + current?.price!, 0);
       setStatus({ ...status, status: data.status, totalPrice: totalPrice })
     }

@@ -9,14 +9,14 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_GET_ORDERS
-} from "../services/actions/ws-actions";
+} from "./actions/ws-actions";
 import {
   WS_AUTH_CONNECTION_START,
   WS_AUTH_CONNECTION_SUCCESS,
   WS_AUTH_CONNECTION_ERROR,
   WS_AUTH_CONNECTION_CLOSED,
   WS_GET_AUTH_ORDERS
-} from "../services/actions/ws-auth-actions";
+} from "./actions/ws-auth-actions";
 
 const wsUrl = 'wss://norma.nomoreparties.space'
 const wsActions = {
@@ -34,11 +34,16 @@ const wsAuthActions = {
   getOrders: WS_GET_AUTH_ORDERS
 };
 
+
 //подключаем DevTools
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+declare global {
+    interface Window {
+      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 //создаем стор где будет все храниться
 const enhancers = composeEnhancers(applyMiddleware(thunk, socketMiddleware(`${wsUrl}/orders`, wsAuthActions, true), socketMiddleware(`${wsUrl}/orders/all`, wsActions, false),));
 export const store = createStore(rootReducer, enhancers);
