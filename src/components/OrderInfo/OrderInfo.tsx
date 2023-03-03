@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from '../../types/hooks';
 import styles from './OrderInfo.module.css'
 import OrderIngredient from '../Orders/OrderIngredient/OrderIngredient';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import TotalPrice from '../TotalPrice/TotalPrice';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FC } from 'react';
 import { TOrder, TIngredient } from '../../types/types';
 
@@ -19,8 +19,8 @@ const OrderInfo: FC<TOrderInfo> = ({ modal, data }) => {
   const { id } = useParams();
 
   const currentOrderData = data.find(item => item._id === id);
-  const allIngredients: Array<TIngredient> = useSelector((store: any) => store.ingredients.items);
-  const orderingredients = currentOrderData?.ingredients.map((item) => allIngredients.find((data) => data._id === item));
+  const allIngredients = useSelector((store) => store.ingredients.items);
+  const orderingredients = currentOrderData?.ingredients.map((item) => allIngredients!.find((data) => data._id === item));
 
   const totalPrice = orderingredients?.reduce((previous, current) => previous + current?.price!, 0);
   const uniqueIngredients = currentOrderData?.ingredients.filter((element, index) => {
@@ -53,7 +53,7 @@ const OrderInfo: FC<TOrderInfo> = ({ modal, data }) => {
           <p className={`${styles.orderConsist} text text_type_main-medium mb-6`}>Состав:</p>
           <ul className={`${styles.blockWithScroll} mb-10`}>
             {uniqueIngredients!.map((item) => {
-              const ingredientInfo = allIngredients.find(ingredient => ingredient._id === item);
+              const ingredientInfo = allIngredients!.find(ingredient => ingredient._id === item);
               return (<li className={`${styles.ingredientCard}`} key={ingredientInfo!._id}>
                 <div className={`${styles.ingredient}`}>
                   <OrderIngredient intersection={false} id={item} />

@@ -5,32 +5,29 @@ import styles from './login.module.css';
 import { useSelector, useDispatch } from '../../types/hooks';
 import { loginUser } from '../../services/actions/login';
 import { FC } from 'react';
+import { useForm } from '../../types/hooks';
 
 const Login: FC = () => {
   const userData = useSelector((store) => store.userInfo); //подгрузка данных из стора
   const dispatch = useDispatch();
 
-  const [loginInfo, setLoginInfo] = useState(
+  const {values, handleChange} = useForm(
     {
       email: "",
       password: "",
     })
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
-  }
-
-  const auth = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const auth = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(loginUser(loginInfo))
+    dispatch(loginUser(values))
   }
 
   return (
     <div className={styles.login}>
       <h2 className={`${styles.title} text text_type_main-medium`}>Вход</h2>
       <form onSubmit={auth} className={styles.form}>
-        <EmailInput value={loginInfo.email} name={'email'} onChange={onChange} />
-        <PasswordInput placeholder="Пароль" value={loginInfo.password} name={'password'} onChange={onChange} />
+        <EmailInput value={values.email} name={'email'} onChange={handleChange} />
+        <PasswordInput placeholder="Пароль" value={values.password} name={'password'} onChange={handleChange} />
         {userData.loginRequestFailed && (
           <p className={`${styles.error} text text_type_main-default mb-2`}>
             Неверный логин или пароль

@@ -10,10 +10,11 @@ import { TOrderActions } from "../services/actions/order";
 import { TResetPasswordActions } from "../services/actions/reset-password";
 import { TWsActions } from "../services/actions/ws-actions";
 import { TWsAuthActions } from "../services/actions/ws-auth-actions";
+import { rootReducer } from "../services/reducers/rootReducer";
 
 
 //типизация стора
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 
 // Все экшены приложения
 type TApplicationActions =

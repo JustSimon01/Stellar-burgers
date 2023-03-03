@@ -142,7 +142,7 @@ export function logout() {
 }
 
 //проверка запросов
-function checkResponse(res: any) {
+function checkResponse(res: Response) {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);
   }

@@ -4,28 +4,25 @@ import { Link } from 'react-router-dom';
 import styles from './register.module.css';
 import { postNewUser } from '../../API/api';
 import { FC } from 'react';
+import { useForm } from '../../types/hooks';
 
 const Register: FC = () => {
 
-  const [userInfo, setUserInfo] = useState(
+  const {values, handleChange} = useForm(
     {
       email: "",
       password: "",
       name: ""
     })
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
-  }
-
   return (
     <div className={styles.login}>
       <h2 className={`${styles.title} text text_type_main-medium`}>Регистрация</h2>
       <form className={styles.form}>
-        <Input placeholder="Имя" value={userInfo.name} name={'name'} onChange={onChange} />
-        <EmailInput placeholder="E-mail" value={userInfo.email} name={'email'} onChange={onChange} />
-        <PasswordInput placeholder="Пароль" value={userInfo.password} name={'password'} onChange={onChange} />
-        <Button htmlType='button' onClick={() => postNewUser(userInfo.email, userInfo.password, userInfo.name)}>Зарегестрироваться</Button>
+        <Input placeholder="Имя" value={values.name} name={'name'} onChange={handleChange} />
+        <EmailInput placeholder="E-mail" value={values.email} name={'email'} onChange={handleChange} />
+        <PasswordInput placeholder="Пароль" value={values.password} name={'password'} onChange={handleChange} />
+        <Button htmlType='button' onClick={() => postNewUser(values.email, values.password, values.name)}>Зарегестрироваться</Button>
       </form>
       <p className={`${styles.newUser} text text_type_main-default`}>Уже зарегестрированы? <Link to='/login' className={`${styles.link}`}>Войти</Link></p>
     </div>

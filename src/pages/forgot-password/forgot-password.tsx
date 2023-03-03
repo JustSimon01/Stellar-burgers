@@ -5,26 +5,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import { sentVerificationEmail } from '../../services/actions/reset-password';
 import { useDispatch } from '../../types/hooks';
 import { FC } from 'react';
+import { useForm } from '../../types/hooks';
 
 const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const {values, handleChange}  = useForm('');
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  }
   //переделать запрос, нужна переадресация
-  const reqestNewPassword = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const reqestNewPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(sentVerificationEmail(email, () => navigate('/reset-password')));
+    dispatch(sentVerificationEmail(values, () => navigate('/reset-password')));
   }
 
   return (
     <div className={styles.login}>
       <h2 className={`${styles.title} text text_type_main-medium`}>Восстановление пароля</h2>
       <form onSubmit={reqestNewPassword} className={styles.form}>
-        <EmailInput placeholder="Укажите e-mail" onChange={onChange} value={email} />
+        <EmailInput placeholder="Укажите e-mail" onChange={handleChange} value={values} />
         <Button htmlType="submit">Восстановить</Button>
       </form>
       <p className={`${styles.newUser} text text_type_main-default`}>Вспомнили пароль? <Link to='/login' className={`${styles.link}`}>Войти</Link></p>
