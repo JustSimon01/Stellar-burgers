@@ -1,7 +1,0 @@
-.AppMain {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  justify-content: center;
-  padding: 40px 0 0;
-}
