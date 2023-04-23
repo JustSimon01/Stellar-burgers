@@ -1,10 +1,19 @@
-# Getting Started with Create React App
+# Stellar-burgers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Магазин в котором можно собрать собственный бургер.
 
 ## Available Scripts
 
-In the project directory, you can run:
+----
+**Инструкция по работе**:
+1. `npm install` — установить зависимости.
+2. `npm run dev` — запустить сайт на локальном сервере.
+
+Инструкция по работе:
+
+npm install — установить зависимости.
+npm run dev — запустить сайт на локальном сервере.
+npm run deploy — собрать проект и запушить на gh-page для деплоя.
 
 ### `npm start`
 
