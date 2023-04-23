@@ -11,8 +11,8 @@
 
 ## Available Scripts
 
-**Посмотреть проект можно по ссылке:**
-[https://justsimon01.github.io/Stellar-burgers/]
+**Посмотреть проект можно по ссылке:**  
+https://justsimon01.github.io/Stellar-burgers/
 
 **Инструкция по работе**:
 1. `npm install` — установить зависимости.
