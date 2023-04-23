@@ -19,4 +19,4 @@
 3. `npm run build` — сборка для продакшена.
 
 ## Технологии
-React, CRA, Redux, React DND, WebSocket, TS
+React, CRA, Redux, React DND, React-router-dom, WebSocket, TS
