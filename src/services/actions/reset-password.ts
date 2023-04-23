@@ -74,6 +74,7 @@ export const sentVerificationEmail: AppThunk = (email: string, goToPage: ()=>voi
       .then(res => {
         if (res && res.success) {
           dispatch(verificationEmailSuccess(res))
+          console.log(res)
         }
       })
       .then(goToPage)

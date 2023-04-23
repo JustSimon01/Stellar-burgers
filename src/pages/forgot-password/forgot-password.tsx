@@ -10,19 +10,21 @@ import { useForm } from '../../types/hooks';
 const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {values, handleChange}  = useForm('');
+  const {values, handleChange}  = useForm({
+    email: "",
+  });
 
   //переделать запрос, нужна переадресация
   const reqestNewPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(sentVerificationEmail(values, () => navigate('/reset-password')));
+    dispatch(sentVerificationEmail(values.email, () => navigate('/reset-password')));
   }
 
   return (
     <div className={styles.login}>
       <h2 className={`${styles.title} text text_type_main-medium`}>Восстановление пароля</h2>
       <form onSubmit={reqestNewPassword} className={styles.form}>
-        <EmailInput placeholder="Укажите e-mail" onChange={handleChange} value={values} />
+        <EmailInput placeholder="Укажите e-mail" name={'email'} onChange={handleChange} value={values.email} />
         <Button htmlType="submit">Восстановить</Button>
       </form>
       <p className={`${styles.newUser} text text_type_main-default`}>Вспомнили пароль? <Link to='/login' className={`${styles.link}`}>Войти</Link></p>
