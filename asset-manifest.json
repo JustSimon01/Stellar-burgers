@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Stellar-burgers/static/css/main.1f16adab.css",
-    "main.js": "/Stellar-burgers/static/js/main.0e0d8dc6.js",
+    "main.js": "/Stellar-burgers/static/js/main.c6bc6ad4.js",
     "static/js/787.2b4cbca8.chunk.js": "/Stellar-burgers/static/js/787.2b4cbca8.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "/Stellar-burgers/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/Stellar-burgers/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -13,11 +13,11 @@
     "index.html": "/Stellar-burgers/index.html",
     "static/media/close.svg": "/Stellar-burgers/static/media/close.3e080984fa353df1b876.svg",
     "main.1f16adab.css.map": "/Stellar-burgers/static/css/main.1f16adab.css.map",
-    "main.0e0d8dc6.js.map": "/Stellar-burgers/static/js/main.0e0d8dc6.js.map",
+    "main.c6bc6ad4.js.map": "/Stellar-burgers/static/js/main.c6bc6ad4.js.map",
     "787.2b4cbca8.chunk.js.map": "/Stellar-burgers/static/js/787.2b4cbca8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1f16adab.css",
-    "static/js/main.0e0d8dc6.js"
+    "static/js/main.c6bc6ad4.js"
   ]
 }
