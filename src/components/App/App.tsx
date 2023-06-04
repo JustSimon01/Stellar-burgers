@@ -59,7 +59,7 @@ function App() {
           <Route path="/profile/orders/:id" element={<ProtectedRoute>
             <OrderFullScreen start={WS_AUTH_CONNECTION_START} close={WS_AUTH_CONNECTION_CLOSED} data={wsAuthOrdersData!} /></ProtectedRoute>}
           />
-          <Route path="/register" element={<ProtectedRoute><Register /></ProtectedRoute>} />
+          <Route path="/register" element={<ProtectedRoute anonymous><Register /></ProtectedRoute>} />
           <Route path="/reset-password" element={<ProtectedRoute anonymous><ResetPassword /></ProtectedRoute>} />
           <Route path="/forgot-password" element={<ProtectedRoute anonymous><ForgotPassword /></ProtectedRoute>} />
           <Route path="/ingredients/:id" element={<Ingredient />} />
